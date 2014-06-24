@@ -50,7 +50,7 @@
 		const RED    = 'rgba(255,0,0,1)';
 		const GREEN  = 'rgba(0,255,0,1)';
 		const BLUE   = 'rgba(0,0,255,1)';
-		const COLORS = [RED, GREEN ,BLUE];
+		const GRID_COLORS = [RED, GREEN ,BLUE];
 
 		var selectedColor = 'rgba(0,0,0)';
 		var colorCounter = 0;
@@ -65,7 +65,7 @@
 			for (var r = 0; r < this.height; r++) {
 				this.tiles[r] = {};
 				for (var c = 0; c < this.width; c++) {
-					this.tiles[r][c] = new Tile(c, r, randColor());
+					this.tiles[r][c] = new Tile(c, r, GRID_COLORS[(c + r) % 2]);
 					this.tiles[r][c].render();
 				}
 			}
@@ -88,10 +88,6 @@
 
 		var Grid = new Grid(GRID_X, GRID_Y);
 		Grid.initialize();
-
-		function randColor() {
-			return COLORS[colorCounter++ % 3];
-		}
 
 		$(function(){
 
