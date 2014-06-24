@@ -10,6 +10,29 @@
 	#tile-grid {
 		border: 1px dotted #000;
 	}
+	.grid { 
+		margin:1em auto; 
+		border-collapse:collapse;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+ 
+	}
+	.grid td {
+	    cursor:pointer;
+	    width:30px; height:30px;
+	    border:1px solid #ccc;
+	    text-align:center;
+	    font-family:sans-serif; font-size:13px
+	}
+	.grid td.clicked {
+	    background-color:yellow;
+	    font-weight:bold; color:red;
+	}
+
 </style>
 <body>
 
@@ -17,7 +40,7 @@
 	<canvas id="tile-grid"></canvas>
 
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 
 		const TILE_SIZE = 30;
 		const GRID_X = 16;
@@ -95,6 +118,7 @@
 			// 	y -= canvas.offsetTop;
 			// })
 		});
-	</script>
+	</script> -->
+	<script src="grid.js"></script>
 </body>
 </html>
