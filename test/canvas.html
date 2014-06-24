@@ -7,6 +7,9 @@
 	<title>Canvas Test</title>
 </head>
 <style>
+	body {
+		background-color: #444;
+	}
 	#canvas {
 		border: 1px dotted #000;
 		margin: 30px;
@@ -28,6 +31,7 @@
 
 	<!-- <canvas id="canvas" width="100" height="100"></canvas> -->
 	<canvas id="canvas"></canvas>
+
 	<div id="color-picker">
 		<div class="swatch black"></div>
 		<div class="swatch white"></div>
@@ -47,12 +51,11 @@
 		var height = canvas.height = TILE_SIZE * GRID_Y;
 		var imageData = ctx.getImageData(0, 0, width, height);
 
-		const RED    = 'rgba(255,0,0,1)';
-		const GREEN  = 'rgba(0,255,0,1)';
-		const BLUE   = 'rgba(0,0,255,1)';
-		const GRID_COLORS = [RED, GREEN ,BLUE];
+		const GREY    = 'rgba(200, 200, 200, 1)';
+		const WHITE  = 'rgba(255, 255, 255, 1)';
+		const GRID_COLORS = [GREY, WHITE];
 
-		var selectedColor = 'rgba(0,0,0)';
+		var selectedColor = 'rgba(0,0,0,1)';
 		var colorCounter = 0;
 
 		function Grid(width, height) {
@@ -65,7 +68,7 @@
 			for (var r = 0; r < this.height; r++) {
 				this.tiles[r] = {};
 				for (var c = 0; c < this.width; c++) {
-					this.tiles[r][c] = new Tile(c, r, GRID_COLORS[(c + r) % 2]);
+					this.tiles[r][c] = new Tile(c, r, GRID_COLORS[(c + r) %2]);
 					this.tiles[r][c].render();
 				}
 			}
