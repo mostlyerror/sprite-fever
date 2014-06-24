@@ -106,7 +106,7 @@
 
 				var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
 				var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
-				var tile = Grid.tiles[gridX][gridY];
+				var tile = Grid.tiles[gridY][gridX];
 				tile.color = selectedColor;
 				tile.render();
 				
