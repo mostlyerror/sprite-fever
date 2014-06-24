@@ -7,23 +7,41 @@
 	<title>Canvas Test</title>
 </head>
 <style>
-	#tile-grid {
+	#canvas {
 		border: 1px dotted #000;
+		margin: 30px;
 	}
+	#color-picker {
+		float: right;
+		border: 1px solid #ccc;
+		padding: 20px;
+	}
+	.swatch {
+		height: 100px;
+		width: 100px;
+		border: 1px solid #ccc;
+	}
+	.black { background-color: #000;}
+	.white { background-color: #fff;}
 </style>
 <body>
 
-	<!-- <canvas id="tile-grid" width="100" height="100"></canvas> -->
-	<canvas id="tile-grid"></canvas>
+	<!-- <canvas id="canvas" width="100" height="100"></canvas> -->
+	<canvas id="canvas"></canvas>
+	<div id="color-picker">
+		<div class="swatch black"></div>
+		<div class="swatch white"></div>
+	</div>
 
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
+
 
 		const TILE_SIZE = 30;
 		const GRID_X = 16;
 		const GRID_Y = 20;
 
-		var canvas = document.getElementById("tile-grid");
+		var canvas = document.getElementById("canvas");
 		var ctx    = canvas.getContext("2d");
 		var width = canvas.width = TILE_SIZE * GRID_X;
 		var height = canvas.height = TILE_SIZE * GRID_Y;
@@ -34,6 +52,7 @@
 		const BLUE   = 'rgba(0,0,255,1)';
 		const COLORS = [RED, GREEN ,BLUE];
 
+		var selectedColor = 'rgba(0,0,0)';
 		var colorCounter = 0;
 
 		function Grid(width, height) {
@@ -75,25 +94,29 @@
 		}
 
 		$(function(){
-			var $grid = $("#tile-grid");
+
+			var $grid = $("#canvas");
+
 			$grid.on('mousedown', function(e) {
-				console.log(e);
+				// prevent default behavior
+				// determine intial mouse position
 				// determine which tile was clicked
-				// var x = e.x, y = e.y;
+				// set that tile's color to currentColor value
+				e.preventDefault();
+
 				var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
 				var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
-				// console.log(e.offsetX + ", " + e.offsetY);
-				alert(gridX+ ", " + gridY);
+				var tile = Grid.tiles[gridX][gridY];
+				tile.color = selectedColor;
+				tile.render();
+				
+				// alert(gridX+ ", " + gridY);
 			});
 
-			// da debugs
-			// $grid.on('mousedown', function(e) {
-			// 	var x = event.x;
-			// 	var y = event.y; 
+			$('.swatch').on('click', function(e) {
+				selectedColor = $(this).css('background-color');
+			});
 
-			// 	x -= canvas.offsetLeft;
-			// 	y -= canvas.offsetTop;
-			// })
 		});
 	</script>
 </body>
