@@ -20,31 +20,35 @@
 		
 		var canvas, ctx;
 		SCALE = 10;
+		
 		$(document).ready(function() {
 			canvas = document.getElementById('pixel-grid');
 			ctx    = canvas.getContext('2d');
-			var width = 10;
-			var height = 10;
 
 			var image = new Image();
 			image.crossOrigin = "anonymous";
 			image.src = "http://localhost:8000/pixelTest.png";
 
+			var width = 10;
+			var height = 10;
 			$(image).load(function() {
 				ctx.drawImage(image, 0, 0, width, height);
 			});
 
+			$(canvas).click(function(e) {
+				var canvasOffset = $(canvas).offset();
+				var imageData  = ctx.getImageData(0, 0, canvas.width, canvas.height);
+				var pixelColor = getPixelColor(e.offsetX, e.offsetY);
+				$("body").css("backgroundColor", pixelColor);
+			});
 		});
 
+		// takes x,y co-ords -> rgba string
 		function getPixelColor(x, y) {
 			var pixel = ctx.getImageData(x, y, SCALE, SCALE).data;
-			return {
-				red   : pixel[0],
-				green : pixel[1],
-				blue  : pixel[2],
-				alpha : pixel[3]
-			};
+			return "rgba("+pixel[0]+", "+pixel[1]+", "+pixel[2]+", "+pixel[3]+")";
 		}
+
 	</script>
 </body>
 </html>
