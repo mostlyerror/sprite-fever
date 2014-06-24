@@ -7,6 +7,11 @@
 	<title>Canvas Test</title>
 </head>
 <style>
+	* {
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
 	body {
 		background-color: #444;
 	}
@@ -21,28 +26,48 @@
 	#color-picker {
 		float: left;
 		border: 1px solid #ccc;
-		padding: 15px;
+		padding: 10px;
+	}
+	#color-map {
+		background-image: url('map-saturation.png');
+		height: 255px;
+		width: 255px;
+	}
+	#swatch-container {
+		margin: 0;
+		font-size: 0; /*hack to remove space between swatches*/
 	}
 	.swatch {
-		height: 50px;
-		width: 50px;
-		border: 1px solid #ccc;
+		display: inline-block;
+		height: 32px;
+		width: 32px;
+		background-color: blue;
 	}
-	.black { background-color: #000;}
-	.white { background-color: #fff;}
 </style>
 <body>
 	<div class="container">
 		<canvas id="canvas"></canvas>
 
 		<div id="color-picker">
-			<div class="swatch black"></div>
-			<div class="swatch white"></div>
+			<canvas id="color-picker-canvas"></canvas>
+			<div id="swatch-container">
+				<div class="swatch"></div>
+				<div class="swatch"></div>
+				<div class="swatch"></div>
+				<div class="swatch"></div>
+				<div class="swatch"></div>
+				<div class="swatch"></div>
+				<div class="swatch"></div>
+				<div class="swatch"></div>
+			</div>
 		</div>
 	</div>
-
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
+
+	COLORS = [
+
+	]
 
 	// adjust this stuff..
 		const TILE_SIZE = 30;
@@ -50,10 +75,22 @@
 		const GRID_Y = 20;
 
 		var canvas = document.getElementById("canvas");
-		var ctx    = canvas.getContext("2d");
-		var width = canvas.width = TILE_SIZE * GRID_X;
-		var height = canvas.height = TILE_SIZE * GRID_Y;
-		var imageData = ctx.getImageData(0, 0, width, height);
+		var canvasCTX    = canvas.getContext("2d");
+		canvas.width = TILE_SIZE * GRID_X;
+		canvas.height = TILE_SIZE * GRID_Y;
+		
+		var colorPicker = document.getElementById("color-picker-canvas");
+		var colorPickerCTX = colorPicker.getContext("2d");
+		colorPicker.width = 256
+		colorPicker.height = 255;
+
+		var colorMap = new Image();
+		colorMap.onload = function() {
+			colorPickerCTX.drawImage(colorMap, 0, 0);
+		};
+		colorMap.src = "http://localhost:8000/map-saturation.png";
+
+		var colorPickerData = colorPickerCTX.getImageData(0, 0, colorPicker.width, colorPicker.height);
 
 		const LIGHT_GREY  = 'rgba(200, 200, 200, 1)';
 		const WHITE = 'rgba(255, 255, 255, 1)';
@@ -85,8 +122,8 @@
 		}
 
 		Tile.prototype.render = function() {
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+			canvasCTX.fillStyle = this.color;
+			canvasCTX.fillRect(this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
 		};
  	
@@ -133,12 +170,15 @@
 						$(this).unbind('mousemove');
 					});
 				});
-			});
+			}); // end mousedown
 
 			$('.swatch').on('click', function(e) {
 				selectedColor = $(this).css('background-color');
-			});
+			}); 
 
+			$(colorPicker).on('click', function(e) {
+				console.log(e);
+			});
 		});
 	</script>
 </body>
