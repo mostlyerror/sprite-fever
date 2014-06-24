@@ -10,37 +10,41 @@
 	body {
 		background-color: #444;
 	}
+	.container {
+		padding: 30px;
+	}
 	#canvas {
 		border: 1px dotted #000;
-		margin: 30px;
+		/*margin: 30px;*/
+		float: left;
 	}
 	#color-picker {
-		float: right;
+		float: left;
 		border: 1px solid #ccc;
 		padding: 20px;
 	}
 	.swatch {
-		height: 100px;
-		width: 100px;
+		height: 75px;
+		width: 75px;
 		border: 1px solid #ccc;
 	}
 	.black { background-color: #000;}
 	.white { background-color: #fff;}
 </style>
 <body>
+	<div class="container">
+		<canvas id="canvas"></canvas>
 
-	<!-- <canvas id="canvas" width="100" height="100"></canvas> -->
-	<canvas id="canvas"></canvas>
-
-	<div id="color-picker">
-		<div class="swatch black"></div>
-		<div class="swatch white"></div>
+		<div id="color-picker">
+			<div class="swatch black"></div>
+			<div class="swatch white"></div>
+		</div>
 	</div>
 
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
 
-
+	// adjust this stuff..
 		const TILE_SIZE = 30;
 		const GRID_X = 16;
 		const GRID_Y = 20;
@@ -51,9 +55,9 @@
 		var height = canvas.height = TILE_SIZE * GRID_Y;
 		var imageData = ctx.getImageData(0, 0, width, height);
 
-		const GREY    = 'rgba(200, 200, 200, 1)';
-		const WHITE  = 'rgba(255, 255, 255, 1)';
-		const GRID_COLORS = [GREY, WHITE];
+		const LIGHT_GREY  = 'rgba(200, 200, 200, 1)';
+		const WHITE = 'rgba(255, 255, 255, 1)';
+		const GRID_BG_COLORS = [LIGHT_GREY, WHITE];
 
 		var selectedColor = 'rgba(0,0,0,1)';
 		var colorCounter = 0;
@@ -68,7 +72,7 @@
 			for (var r = 0; r < this.height; r++) {
 				this.tiles[r] = {};
 				for (var c = 0; c < this.width; c++) {
-					this.tiles[r][c] = new Tile(c, r, GRID_COLORS[(c + r) %2]);
+					this.tiles[r][c] = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2]);
 					this.tiles[r][c].render();
 				}
 			}
@@ -82,11 +86,8 @@
 
 		Tile.prototype.render = function() {
 			ctx.fillStyle = this.color;
-			ctx.fillRect(
-				this.x * TILE_SIZE, 
-				this.y * TILE_SIZE, 
-				TILE_SIZE, 
-				TILE_SIZE);
+			ctx.fillRect(this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
 		};
 
 		var Grid = new Grid(GRID_X, GRID_Y);
@@ -120,6 +121,13 @@
 						tile.color = selectedColor;
 						tile.render();
 					}
+
+					// shoudl i keep this or no?
+					// maybe i wnat people to go off the edge and then
+					// fill a bunch of tiles in ... who knows? testing!
+					$(this).on('mouseout', function(e) {
+						$(this).unbind('mousemove');
+					});
 
 					$(this).on('mouseup', function(e) {
 						$(this).unbind('mousemove');
