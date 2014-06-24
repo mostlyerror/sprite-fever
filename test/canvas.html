@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
 
-		const TILE_SIZE = 50;
+		const TILE_SIZE = 30;
 		const GRID_X = 16;
 		const GRID_Y = 20;
 
@@ -29,9 +29,9 @@
 		var height = canvas.height = TILE_SIZE * GRID_Y;
 		var imageData = ctx.getImageData(0, 0, width, height);
 
-		const RED       = 'rgba(255,0,0,1)';
-		const GREEN       = 'rgba(0,255,0,1)';
-		const BLUE       = 'rgba(0,0,255,1)';
+		const RED    = 'rgba(255,0,0,1)';
+		const GREEN  = 'rgba(0,255,0,1)';
+		const BLUE   = 'rgba(0,0,255,1)';
 		const COLORS = [RED, GREEN ,BLUE];
 
 		var colorCounter = 0;
@@ -67,12 +67,34 @@
 				TILE_SIZE);
 		};
 
-		var Grid = new Grid(10, 10);
+		var Grid = new Grid(GRID_X, GRID_Y);
 		Grid.initialize();
 
 		function randColor() {
 			return COLORS[colorCounter++ % 3];
 		}
+
+		$(function(){
+			var $grid = $("#tile-grid");
+			$grid.on('mousedown', function(e) {
+				console.log(e);
+				// determine which tile was clicked
+				// var x = e.x, y = e.y;
+				var gridX = Math.floor(e.offsetX / TILE_SIZE);
+				var gridY = Math.floor(e.offsetY / TILE_SIZE);
+				// console.log(e.offsetX + ", " + e.offsetY);
+				alert(gridX+ ", " + gridY);
+			});
+
+			// da debugs
+			// $grid.on('mousedown', function(e) {
+			// 	var x = event.x;
+			// 	var y = event.y; 
+
+			// 	x -= canvas.offsetLeft;
+			// 	y -= canvas.offsetTop;
+			// })
+		});
 	</script>
 </body>
 </html>
