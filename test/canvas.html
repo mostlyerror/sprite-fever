@@ -202,9 +202,7 @@
 			}
 		}
 
-		Grid.prototype.clr = function() {
-			console.log('called');
-			// this.el.clearRect(0, 0, this.el.width, this.el.height);
+		Grid.prototype.clear = function() {
 			this.ctx.clearRect(0, 0, this.el.width, this.el.height);
 		}
 
@@ -246,7 +244,7 @@
 			var $overlay = $(overlay);
 
 			$('#button-clear').on('click', function(e) {
-				oGrid.clr();
+				oGrid.clear();
 			});			
 
 			$('#button-save').on('click', function(e) {
