@@ -66,14 +66,11 @@
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
 
-	COLORS = [
-
-	]
-
 	// adjust this stuff..
 		const TILE_SIZE = 30;
 		const GRID_X = 16;
 		const GRID_Y = 20;
+		const NUM_SWATCHES = 9;
 
 		var canvas = document.getElementById("canvas");
 		var canvasCTX    = canvas.getContext("2d");
@@ -197,6 +194,12 @@
 			// concat class string
 			// calculate the rgba code
 			// update swatch bgcolor
+			var klass = ".swatch-";
+			for (var i = 0; i < NUM_SWATCHES; i++) {
+				// klass += i;
+				var $swatch = $(klass + i);
+				$swatch.css('background-color', selectedColor);
+			}
 		}
 	</script>
 </body>
