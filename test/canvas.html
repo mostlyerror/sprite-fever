@@ -194,6 +194,10 @@
 			}
 		}
 
+		Grid.prototype.clear = function() {
+			this.initialize(true);
+		}
+
 		Grid.prototype.save = function() {
 
 		}
@@ -224,8 +228,21 @@
 			bgGrid.initialize(true);
 			oGrid.initialize();
 
+			// for debugging
+			window.bgGrid = bgGrid;
+			window.oGrid = oGrid;
+
 			var $bg      = $(bg);
 			var $overlay = $(overlay);
+
+			$('#button-clear').on('click', function(e) {
+				oGrid.clear();
+			});
+
+			$(picker).on('click', function(e) {
+				selectedColor = getPixelColor(e.offsetX, e.offsetY);
+				updateSwatches();
+			});
 
 			$overlay.on('mousedown', function(e) {
 				e.preventDefault();
@@ -266,12 +283,7 @@
 					selectedColor = $(this).css('background-color');
 				}); 
 
-			});
-
-			$(picker).on('click', function(e) {
-				selectedColor = getPixelColor(e.offsetX, e.offsetY);
-				updateSwatches();
-			});
+			}); // end $overlay handlers
 
 		function getPixelColor(x, y) {
 			var rgba = pickerCTX.getImageData(x, y, 1, 1).data;
