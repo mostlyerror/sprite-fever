@@ -71,6 +71,7 @@
 		const GRID_X = 16;
 		const GRID_Y = 20;
 		const NUM_SWATCHES = 9;
+		const SWATCH_LIGHTNESS_STEP = Math.ceil(255 / NUM_SWATCHES); //29 for 9 swatches;
 
 		var canvas = document.getElementById("canvas");
 		var canvasCTX    = canvas.getContext("2d");
@@ -188,17 +189,28 @@
 			var rgba = colorPickerCTX.getImageData(x, y, 1, 1).data;
 			return "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+rgba[3]+")";
 		}
+		function rgbaLighten(str, mult) {
+			// parse an 'rgba(r,g,b,a)' string
+			// return an array of integers as strings;
+			str = str.substring(5, str.length-1).split(',');
+			// find the 0 color value and update;
+			str[str.indexOf('0')] = mult * SWATCH_LIGHTNESS_STEP;
+			// rebuild the rgba string
+			return "rgba(" + str.join(',') + ")";
+		}
 
 		function updateSwatches() {
 			// loop over numSwatches
 			// concat class string
 			// calculate the rgba code
 			// update swatch bgcolor
+				// find which rgb value is zero
+				// increment by 255/9?
 			var klass = ".swatch-";
 			for (var i = 0; i < NUM_SWATCHES; i++) {
-				// klass += i;
 				var $swatch = $(klass + i);
-				$swatch.css('background-color', selectedColor);
+				var newColor = rgbaLighten(selectedColor, i);
+				$swatch.css('background-color', newColor);
 			}
 		}
 	</script>
