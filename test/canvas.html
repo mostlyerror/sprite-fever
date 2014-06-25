@@ -88,6 +88,7 @@
 		colorMap.onload = function() {
 			colorPickerCTX.drawImage(colorMap, 0, 0);
 		};
+		colorMap.crossOrigin = "anonymous";
 		colorMap.src = "http://localhost:8000/map-saturation.png";
 
 		var colorPickerData = colorPickerCTX.getImageData(0, 0, colorPicker.width, colorPicker.height);
@@ -123,8 +124,11 @@
 
 		Tile.prototype.render = function() {
 			canvasCTX.fillStyle = this.color;
-			canvasCTX.fillRect(this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-
+			canvasCTX.fillRect(
+				this.x * TILE_SIZE, 
+				this.y * TILE_SIZE, 
+				TILE_SIZE, 
+				TILE_SIZE);
 		};
  	
 		var Grid = new Grid(GRID_X, GRID_Y);
@@ -177,9 +181,14 @@
 			}); 
 
 			$(colorPicker).on('click', function(e) {
-				console.log(e);
+				selectedColor = getPixelColor(e.offsetX, e.offsetY);
 			});
 		});
+
+		function getPixelColor(x, y) {
+			var rgba = colorPickerCTX.getImageData(x, y, 1, 1).data;
+			return "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+rgba[3]+")";
+		}
 	</script>
 </body>
 </html>
