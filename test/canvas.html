@@ -186,21 +186,26 @@
 		}
 
 		Grid.prototype.initialize = function(render) {
+			// create empty Tile objects
 			for (var r = 0; r < this.height; r++) {
 				this.tiles[r] = {};
 				for (var c = 0; c < this.width; c++) {
-					var color = render ?
-						GRID_BG_COLORS[(c + r) % 2]:
-						null; 
-					var t = new Tile(c, r, color, this.ctx);
-					this.tiles[r][c] = t;
-					if (render) t.render(color);
+					if (render) {
+						var t = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2], this.ctx);
+						this.tiles[r][c] = t;
+						t.render();
+					} else {
+						var t = new Tile(c, r, null, this.ctx);
+						this.tiles[r][c] = t;
+					}
 				}
 			}
 		}
 
-		Grid.prototype.clear = function() {
-			this.initialize(true);
+		Grid.prototype.clr = function() {
+			console.log('called');
+			// this.el.clearRect(0, 0, this.el.width, this.el.height);
+			this.ctx.clearRect(0, 0, this.el.width, this.el.height);
 		}
 
 		Grid.prototype.save = function() {
@@ -241,7 +246,7 @@
 			var $overlay = $(overlay);
 
 			$('#button-clear').on('click', function(e) {
-				oGrid.clear();
+				oGrid.clr();
 			});			
 
 			$('#button-save').on('click', function(e) {
@@ -263,15 +268,7 @@
 				tile.color = selectedColor;
 				tile.empty = false;
 				tile.render();
-
-				$(this).on('mouseout', function(e) { 
-					$(this).unbind('mousemove');
-				});
-
-				$(this).on('mouseup', function(e) {
-					$(this).unbind('mousemove');
-				});
-
+				
 				$(this).on('mousemove', function(e) {
 					e.preventDefault();
 
@@ -286,6 +283,15 @@
 						tile.fillColor = selectedColor;
 						tile.render(tile.fillColor);
 					}
+
+					$(this).on('mouseout', function(e) { 
+						$(this).off('mousemove');
+					});
+
+					$(this).on('mouseup', function(e) {
+						$(this).unbind('mousemove');
+					});
+
 				}); // end mousedown
 
 				$('.swatch').on('click', function(e) {
