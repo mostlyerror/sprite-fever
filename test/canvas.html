@@ -31,7 +31,7 @@
 	#color-map {
 		background-image: url('map-saturation.png');
 		height: 255px;
-		width: 255px;
+		width: 270px;
 	}
 	#swatch-container {
 		margin: 0;
@@ -39,8 +39,8 @@
 	}
 	.swatch {
 		display: inline-block;
-		height: 32px;
-		width: 32px;
+		height: 30px;
+		width: 30px;
 		background-color: blue;
 	}
 </style>
@@ -51,14 +51,15 @@
 		<div id="color-picker">
 			<canvas id="color-picker-canvas"></canvas>
 			<div id="swatch-container">
-				<div class="swatch"></div>
-				<div class="swatch"></div>
-				<div class="swatch"></div>
-				<div class="swatch"></div>
-				<div class="swatch"></div>
-				<div class="swatch"></div>
-				<div class="swatch"></div>
-				<div class="swatch"></div>
+				<div class="swatch swatch-0"></div>
+				<div class="swatch swatch-1"></div>
+				<div class="swatch swatch-2"></div>
+				<div class="swatch swatch-3"></div>
+				<div class="swatch swatch-4"></div>
+				<div class="swatch swatch-5"></div>
+				<div class="swatch swatch-6"></div>
+				<div class="swatch swatch-7"></div>
+				<div class="swatch swatch-8"></div>
 			</div>
 		</div>
 	</div>
@@ -81,12 +82,12 @@
 		
 		var colorPicker = document.getElementById("color-picker-canvas");
 		var colorPickerCTX = colorPicker.getContext("2d");
-		colorPicker.width = 256
+		colorPicker.width = 270;
 		colorPicker.height = 255;
 
 		var colorMap = new Image();
 		colorMap.onload = function() {
-			colorPickerCTX.drawImage(colorMap, 0, 0);
+			colorPickerCTX.drawImage(colorMap, 0, 0, colorPicker.width, colorPicker.height);
 		};
 		colorMap.crossOrigin = "anonymous";
 		colorMap.src = "http://localhost:8000/map-saturation.png";
@@ -182,12 +183,20 @@
 
 			$(colorPicker).on('click', function(e) {
 				selectedColor = getPixelColor(e.offsetX, e.offsetY);
+				updateSwatches();
 			});
 		});
 
 		function getPixelColor(x, y) {
 			var rgba = colorPickerCTX.getImageData(x, y, 1, 1).data;
 			return "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+rgba[3]+")";
+		}
+
+		function updateSwatches() {
+			// loop over numSwatches
+			// concat class string
+			// calculate the rgba code
+			// update swatch bgcolor
 		}
 	</script>
 </body>
