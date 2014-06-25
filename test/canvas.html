@@ -207,16 +207,6 @@
 						tile.fillColor = selectedColor;
 						tile.render(tile.fillColor);
 					}
-
-					// maybe i wnat people to go off the edge and then
-					// fill a bunch of tiles in ... who knows? testing!
-					$(this).on('mouseout', function(e) {
-						$(this).unbind('mousemove');
-					});
-
-					$(this).on('mouseup', function(e) {
-						$(this).unbind('mousemove');
-					});
 				}); // end mousedown
 
 				$('.swatch').on('click', function(e) {
