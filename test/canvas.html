@@ -75,6 +75,9 @@
 		border: 1px solid #fff;
 		height: 300px;
 	}
+	.preview canvas {
+		cursor: pointer;
+	}
 	.menu {
 		border: 1px solid #fff;
 	}
@@ -120,7 +123,10 @@
 					<div class="controls">Controls</div>
 				</div>
 				<div class="row">
-					<div class="preview">Preview</div>
+					<div class="preview">
+						Preview
+						<canvas id="bg"></canvas>
+					</div>
 				</div>
 				<div class="row">
 					<div class="menu">
@@ -148,12 +154,14 @@
 
 		// Editor Canvases
 		var overlay = document.getElementById("overlay");
+		var preview = document.getElementById("preview");
 		var bg      = document.getElementById("bg");
 		var bgCTX   = bg.getContext("2d");
 		var oCTX    = overlay.getContext("2d");
+		var pCTX    = oCTX.translate(overlay.width, overlay.height);
 		bg.width    = overlay.width  = TILE_SIZE * GRID_X;
 		bg.height   = overlay.height = TILE_SIZE * GRID_Y;
-		
+
 		// Color Picker & Swatches
 		var picker    = document.getElementById("color-picker-canvas");
 		var pickerCTX = picker.getContext("2d");
@@ -232,16 +240,19 @@
 
 			var bgGrid = new Grid(bg, GRID_X, GRID_Y);
 			var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
+			var pGrid  = new Grid(overlay, GRID_X, GRID_Y);
 
 			bgGrid.initialize(true);
 			oGrid.initialize();
+			// pGrid.initialize();
 
 			// for debugging
-			window.bgGrid = bgGrid;
-			window.oGrid = oGrid;
+			// window.bgGrid = bgGrid;
+			// window.oGrid = oGrid;
 
 			var $bg      = $(bg);
 			var $overlay = $(overlay);
+			var $preview = $(preview);
 
 			$('#button-clear').on('click', function(e) {
 				oGrid.clear();
@@ -263,9 +274,11 @@
 				var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
 
 				var tile = oGrid.tiles[gridY][gridX];
-				tile.color = selectedColor;
-				tile.empty = false;
+				var ptile = oGrid.tiles[gridY][gridX];
+				tile.color = ptile.color = selectedColor;
+				// tile.empty = false;
 				tile.render();
+				ptile.render();
 				
 				$(this).on('mousemove', function(e) {
 					e.preventDefault();
@@ -278,8 +291,9 @@
 
 					if (gridX !== lastX || gridY !== lastY) {
 						var tile = oGrid.tiles[gridY][gridX];
-						tile.fillColor = selectedColor;
+						tile.fillColor = ptile.fillColor = selectedColor;
 						tile.render(tile.fillColor);
+						ptile.render(ptile.fillColor);
 					}
 
 					$(this).on('mouseout', function(e) { 
