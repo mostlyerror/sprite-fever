@@ -196,7 +196,10 @@
 			// find the 0 color value and update;
 			str[str.indexOf('0')] = mult * SWATCH_LIGHTNESS_STEP;
 			// rebuild the rgba string
+			// console.log(str);
+			// console.log("rgba(" + str.join(',') + ")");
 			return "rgba(" + str.join(',') + ")";
+
 		}
 
 		function updateSwatches() {
