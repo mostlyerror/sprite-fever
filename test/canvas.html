@@ -5,21 +5,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Canvas Test</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/foundation.min.css">
 </head>
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-		border: 0;
-	}
 	body {
 		background-color: #444;
 	}
 	.container {
 		padding: 30px;
+		margin: 0 auto;
+		width: 1140px;
 	}
 	.grid-container {
 		position: relative;
+		clear: both;
 	}
 	canvas {
 		cursor: crosshair;
@@ -42,6 +42,10 @@
 		float: right;
 		border: 1px solid #ccc;
 		padding: 10px;
+		width: 100%;
+	}
+	#controls {
+		float: right;
 	}
 	#color-map {
 		background-image: url('map-saturation.png');
@@ -56,31 +60,50 @@
 		display: inline-block;
 		height: 30px;
 		width: 30px;
-		background-color: blue;
+		background-color: #000;
 	}
 </style>
 <body>
 	<div class="container">
-		
-		<div class="grid-container">
-			<canvas id="overlay"></canvas>		
-			<canvas id="bg"></canvas>
-		</div>
+		<div class="row"> <!-- main row -->
 
-		<div id="color-picker">
-			<canvas id="color-picker-canvas"></canvas>
-			<div id="swatch-container">
-				<div class="swatch swatch-0"></div>
-				<div class="swatch swatch-1"></div>
-				<div class="swatch swatch-2"></div>
-				<div class="swatch swatch-3"></div>
-				<div class="swatch swatch-4"></div>
-				<div class="swatch swatch-5"></div>
-				<div class="swatch swatch-6"></div>
-				<div class="swatch swatch-7"></div>
-				<div class="swatch swatch-8"></div>
+			<div id="left" class="columns large-3">
+				<div class="row">
+					<div id="color-picker">
+						<canvas id="color-picker-canvas"></canvas>
+						<div id="swatch-container">
+							<div class="swatch swatch-0"></div>
+							<div class="swatch swatch-1"></div>
+							<div class="swatch swatch-2"></div>
+							<div class="swatch swatch-3"></div>
+							<div class="swatch swatch-4"></div>
+							<div class="swatch swatch-5"></div>
+							<div class="swatch swatch-6"></div>
+							<div class="swatch swatch-7"></div>
+							<div class="swatch swatch-8"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div id="toolbar">
+						<button id="button-clear" class="button clear">clear</button>
+					</div>
+				</div>
 			</div>
-		</div>
+
+			<div id="middle" class="columns large-5">
+				<div class="grid-container">
+					<canvas id="overlay"></canvas>		
+					<canvas id="bg"></canvas>
+				</div>
+			</div>
+
+			<div id="right"class="columns large-3">
+				<div id="controls">
+					<button id="button-save" class="button save">Save</button>
+				</div>
+			</div>
+		</div> <!-- end main container row -->
 	</div>
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
@@ -107,7 +130,7 @@
 		// Color Picker
 		var picker    = document.getElementById("color-picker-canvas");
 		var pickerCTX = picker.getContext("2d");
-		picker.width  = 270;
+		picker.width  = $(picker.parentNode).width();
 		picker.height = 255;
 		var colorMap = new Image();
 		colorMap.onload = function() {
@@ -185,7 +208,7 @@
 				tile.empty = false;
 				tile.render();
 
-				$(this).on('mouseout', function(e) {
+				$(this).on('mouseout', function(e) { 
 					$(this).unbind('mousemove');
 				});
 
@@ -213,10 +236,11 @@
 					selectedColor = $(this).css('background-color');
 				}); 
 
-				$(picker).on('click', function(e) {
-					selectedColor = getPixelColor(e.offsetX, e.offsetY);
-					updateSwatches();
-				});
+			});
+
+			$(picker).on('click', function(e) {
+				selectedColor = getPixelColor(e.offsetX, e.offsetY);
+				updateSwatches();
 			});
 
 		function getPixelColor(x, y) {
@@ -224,8 +248,8 @@
 			return "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+rgba[3]+")";
 		}
 
-		// this totally doesn't work
-		// but does some cool/strange stuff
+		// this doesn't actually, really lighten stuff?
+		// but it does some cool/strange stuff
 		function rgbaLighten(str, mult) {
 			// parse an 'rgba(r,g,b,a)' string
 			// return an array of integers as strings;
