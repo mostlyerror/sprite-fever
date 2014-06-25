@@ -127,11 +127,16 @@
 		bg.width    = overlay.width  = TILE_SIZE * GRID_X;
 		bg.height   = overlay.height = TILE_SIZE * GRID_Y;
 		
-		// Color Picker
+		// Color Picker & Swatches
 		var picker    = document.getElementById("color-picker-canvas");
 		var pickerCTX = picker.getContext("2d");
+		var swatches  = document.querySelectorAll('.swatch');
+		var swatchParent = document.querySelector('.swatch').parentNode;
+
+		// resize picker & swatches
 		picker.width  = $(picker.parentNode).width();
 		picker.height = 255;
+		$('.swatch').width($(swatchParent).width() / swatches.length);
 		var colorMap = new Image();
 		colorMap.onload = function() {
 			pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
@@ -189,7 +194,6 @@
 
 			var bgGrid = new Grid(bg, GRID_X, GRID_Y);
 			var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
-			window.oGrid = oGrid;
 
 			bgGrid.initialize(true);
 			oGrid.initialize();
