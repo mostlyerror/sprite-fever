@@ -18,16 +18,28 @@
 	.container {
 		padding: 30px;
 	}
+	.grid-container {
+		position: relative;
+	}
 	canvas {
 		cursor: crosshair;
 	}
-	#canvas {
+	#bg, #overlay {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	#bg {
 		border: 1px dotted #000;
-		/*margin: 30px;*/
-		float: left;
+		z-index: 0;
+	}
+	#overlay {
+		border: 1px solid #fff;
+		z-index: 999;
+		opacity: 0;
 	}
 	#color-picker {
-		float: left;
+		float: right;
 		border: 1px solid #ccc;
 		padding: 10px;
 	}
@@ -49,9 +61,11 @@
 </style>
 <body>
 	<div class="container">
-
-		<canvas id="canvas"></canvas>
-		<canvas id="bg-canvas"></canvas>
+		
+		<div class="grid-container">
+			<canvas id="overlay"></canvas>		
+			<canvas id="bg"></canvas>
+		</div>
 
 		<div id="color-picker">
 			<canvas id="color-picker-canvas"></canvas>
@@ -71,95 +85,113 @@
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
 
-	// adjust this stuff..
+		// Constants(for now)
+		// adjust this stuff..
+		// with form controls later?
 		const TILE_SIZE = 30;
 		const GRID_X = 16;
 		const GRID_Y = 20;
 		const NUM_SWATCHES = 9;
 		const SWATCH_LIGHTNESS_STEP = Math.ceil(255 / NUM_SWATCHES); //29 for 9 swatches;
-
-		var canvas = document.getElementById("canvas");
-		var canvasCTX    = canvas.getContext("2d");
-		canvas.width = TILE_SIZE * GRID_X;
-		canvas.height = TILE_SIZE * GRID_Y;
-		
-		var colorPicker = document.getElementById("color-picker-canvas");
-		var colorPickerCTX = colorPicker.getContext("2d");
-		colorPicker.width = 270;
-		colorPicker.height = 255;
-
-		var colorMap = new Image();
-		colorMap.onload = function() {
-			colorPickerCTX.drawImage(colorMap, 0, 0, colorPicker.width, colorPicker.height);
-		};
-		colorMap.crossOrigin = "anonymous";
-		colorMap.src = "http://localhost:8000/map-saturation.png";
-
-		var colorPickerData = colorPickerCTX.getImageData(0, 0, colorPicker.width, colorPicker.height);
-
 		const LIGHT_GREY  = 'rgba(200, 200, 200, 1)';
 		const WHITE = 'rgba(255, 255, 255, 1)';
 		const GRID_BG_COLORS = [LIGHT_GREY, WHITE];
 
+		// Editor Canvases
+		var overlay = document.getElementById("overlay");
+		var bg      = document.getElementById("bg");
+		var bgCTX   = bg.getContext("2d");
+		bg.width    = overlay.width  = TILE_SIZE * GRID_X;
+		bg.height   = overlay.height = TILE_SIZE * GRID_Y;
+		
+		// Color Picker
+		var picker    = document.getElementById("color-picker-canvas");
+		var pickerCTX = picker.getContext("2d");
+		picker.width  = 270;
+		picker.height = 255;
+		var colorMap = new Image();
+		colorMap.onload = function() {
+			pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
+		};
+		colorMap.crossOrigin = "anonymous"; // CORS bullshit
+		colorMap.src = "http://localhost:8000/map-saturation.png"; // CORS bullshit
+		var colorPickerData = pickerCTX.getImageData(0, 0, picker.width, picker.height);
+
+		// Color Variables
 		var selectedColor = 'rgba(0,0,0,1)';
 		var colorCounter = 0;
 
-		// function Canvas(el, width, height, opts) {
-			
-		// }
-
 		// Why would I ever have multiple grids..?
-		function Grid(width, height) {
+		function Grid(el, width, height) {
+			this.el = el;
 			this.width = width;
 			this.height = height;
 			this.tiles = {};
 		}
 
-		Grid.prototype.initialize = function() {
+		Grid.prototype.initialize = function(render) {
 			for (var r = 0; r < this.height; r++) {
 				this.tiles[r] = {};
-				for (var c = 0; c < this.width; c++) {
-					this.tiles[r][c] = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2]);
-					this.tiles[r][c].render(this.tiles[r][c].emptyColor);
+				for (var c = 0; c < this.width; c++) { 
+					var t = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2]);
+					this.tiles[r][c] = t;
+					if (render) t.render(t.color);
 				}
 			}
 		}
 
-		function Tile(x, y, emptyColor) {
+		Grid.prototype.save = function() {
+
+		}
+
+		function Tile(x, y, color) {
 			this.x = x;
 			this.y = y;
-			this.emptyColor = emptyColor;
-			this.fillColor = null;
+			this.color = color;
+			this.empty = true;
 		}
 
 		Tile.prototype.render = function(color) {
 			var color = color || this.color;
-			canvasCTX.fillStyle = color;
-			canvasCTX.fillRect(
+			bgCTX.fillStyle = color;
+			bgCTX.fillRect(
 				this.x * TILE_SIZE, 
 				this.y * TILE_SIZE, 
 				TILE_SIZE, 
 				TILE_SIZE);
-		};
- 	
+		}; 	
 
-		var Grid = new Grid(GRID_X, GRID_Y);
-		Grid.initialize();
 
 		$(function(){
 
+			var bgGrid = new Grid(bg, GRID_X, GRID_Y);
+			var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
+			window.oGrid = oGrid;
 
-			var $grid = $("#canvas");
+			bgGrid.initialize(true);
+			oGrid.initialize();
 
-			$grid.on('mousedown', function(e) {
+			var $bg      = $(bg);
+			var $overlay = $(overlay);
+
+			$overlay.on('mousedown', function(e) {
 				e.preventDefault();
 
 				var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
 				var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
 
-				var tile = Grid.tiles[gridY][gridX];
+				var tile = oGrid.tiles[gridY][gridX];
 				tile.color = selectedColor;
+				tile.empty = false;
 				tile.render();
+
+				$(this).on('mouseout', function(e) {
+					$(this).unbind('mousemove');
+				});
+
+				$(this).on('mouseup', function(e) {
+					$(this).unbind('mousemove');
+				});
 
 				$(this).on('mousemove', function(e) {
 					e.preventDefault();
@@ -171,13 +203,11 @@
 					var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
 
 					if (gridX !== lastX || gridY !== lastY) {
-						var tile = Grid.tiles[gridY][gridX];
+						var tile = oGrid.tiles[gridY][gridX];
 						tile.fillColor = selectedColor;
 						tile.render(tile.fillColor);
 					}
 
-					// shoudl i keep this or no?
-					// Hmm..
 					// maybe i wnat people to go off the edge and then
 					// fill a bunch of tiles in ... who knows? testing!
 					$(this).on('mouseout', function(e) {
@@ -187,23 +217,25 @@
 					$(this).on('mouseup', function(e) {
 						$(this).unbind('mousemove');
 					});
+				}); // end mousedown
+
+				$('.swatch').on('click', function(e) {
+					selectedColor = $(this).css('background-color');
+				}); 
+
+				$(picker).on('click', function(e) {
+					selectedColor = getPixelColor(e.offsetX, e.offsetY);
+					updateSwatches();
 				});
-			}); // end mousedown
-
-			$('.swatch').on('click', function(e) {
-				selectedColor = $(this).css('background-color');
-			}); 
-
-			$(colorPicker).on('click', function(e) {
-				selectedColor = getPixelColor(e.offsetX, e.offsetY);
-				updateSwatches();
 			});
-		});
 
 		function getPixelColor(x, y) {
-			var rgba = colorPickerCTX.getImageData(x, y, 1, 1).data;
+			var rgba = pickerCTX.getImageData(x, y, 1, 1).data;
 			return "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+rgba[3]+")";
 		}
+
+		// this totally doesn't work
+		// but does some cool/strange stuff
 		function rgbaLighten(str, mult) {
 			// parse an 'rgba(r,g,b,a)' string
 			// return an array of integers as strings;
@@ -230,6 +262,7 @@
 				$swatch.css('background-color', newColor);
 			}
 		}
+	});
 	</script>
 </body>
 </html>
