@@ -18,6 +18,9 @@
 	.container {
 		padding: 30px;
 	}
+	canvas {
+		cursor: crosshair;
+	}
 	#canvas {
 		border: 1px dotted #000;
 		/*margin: 30px;*/
@@ -46,7 +49,9 @@
 </style>
 <body>
 	<div class="container">
+
 		<canvas id="canvas"></canvas>
+		<canvas id="bg-canvas"></canvas>
 
 		<div id="color-picker">
 			<canvas id="color-picker-canvas"></canvas>
@@ -99,6 +104,11 @@
 		var selectedColor = 'rgba(0,0,0,1)';
 		var colorCounter = 0;
 
+		// function Canvas(el, width, height, opts) {
+			
+		// }
+
+		// Why would I ever have multiple grids..?
 		function Grid(width, height) {
 			this.width = width;
 			this.height = height;
@@ -110,19 +120,21 @@
 				this.tiles[r] = {};
 				for (var c = 0; c < this.width; c++) {
 					this.tiles[r][c] = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2]);
-					this.tiles[r][c].render();
+					this.tiles[r][c].render(this.tiles[r][c].emptyColor);
 				}
 			}
 		}
 
-		function Tile(x, y, color) {
+		function Tile(x, y, emptyColor) {
 			this.x = x;
 			this.y = y;
-			this.color = color || null;
+			this.emptyColor = emptyColor;
+			this.fillColor = null;
 		}
 
-		Tile.prototype.render = function() {
-			canvasCTX.fillStyle = this.color;
+		Tile.prototype.render = function(color) {
+			var color = color || this.color;
+			canvasCTX.fillStyle = color;
 			canvasCTX.fillRect(
 				this.x * TILE_SIZE, 
 				this.y * TILE_SIZE, 
@@ -130,10 +142,12 @@
 				TILE_SIZE);
 		};
  	
+
 		var Grid = new Grid(GRID_X, GRID_Y);
 		Grid.initialize();
 
 		$(function(){
+
 
 			var $grid = $("#canvas");
 
@@ -158,11 +172,12 @@
 
 					if (gridX !== lastX || gridY !== lastY) {
 						var tile = Grid.tiles[gridY][gridX];
-						tile.color = selectedColor;
-						tile.render();
+						tile.fillColor = selectedColor;
+						tile.render(tile.fillColor);
 					}
 
 					// shoudl i keep this or no?
+					// Hmm..
 					// maybe i wnat people to go off the edge and then
 					// fill a bunch of tiles in ... who knows? testing!
 					$(this).on('mouseout', function(e) {
@@ -199,7 +214,6 @@
 			// console.log(str);
 			// console.log("rgba(" + str.join(',') + ")");
 			return "rgba(" + str.join(',') + ")";
-
 		}
 
 		function updateSwatches() {
