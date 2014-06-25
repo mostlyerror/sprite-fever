@@ -63,7 +63,7 @@
 	#overlay {
 		border: 1px solid #fff;
 		z-index: 999;
-		opacity: 0;
+		opacity: 1;
 	}
 
 	/* Right Panel */
@@ -150,6 +150,7 @@
 		var overlay = document.getElementById("overlay");
 		var bg      = document.getElementById("bg");
 		var bgCTX   = bg.getContext("2d");
+		var oCTX    = overlay.getContext("2d");
 		bg.width    = overlay.width  = TILE_SIZE * GRID_X;
 		bg.height   = overlay.height = TILE_SIZE * GRID_Y;
 		
@@ -178,6 +179,7 @@
 		// Why would I ever have multiple grids..?
 		function Grid(el, width, height) {
 			this.el = el;
+			this.ctx = el.getContext("2d");
 			this.width = width;
 			this.height = height;
 			this.tiles = {};
@@ -186,10 +188,13 @@
 		Grid.prototype.initialize = function(render) {
 			for (var r = 0; r < this.height; r++) {
 				this.tiles[r] = {};
-				for (var c = 0; c < this.width; c++) { 
-					var t = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2]);
+				for (var c = 0; c < this.width; c++) {
+					var color = render ?
+						GRID_BG_COLORS[(c + r) % 2]:
+						null; 
+					var t = new Tile(c, r, color, this.ctx);
 					this.tiles[r][c] = t;
-					if (render) t.render(t.color);
+					if (render) t.render(color);
 				}
 			}
 		}
@@ -199,20 +204,20 @@
 		}
 
 		Grid.prototype.save = function() {
-
+			console.log(this.el.toDataURL());
 		}
 
-		function Tile(x, y, color) {
+		function Tile(x, y, color, ctx) {
 			this.x = x;
 			this.y = y;
 			this.color = color;
 			this.empty = true;
+			this.ctx = ctx;
 		}
 
-		Tile.prototype.render = function(color) {
-			var color = color || this.color;
-			bgCTX.fillStyle = color;
-			bgCTX.fillRect(
+		Tile.prototype.render = function() {
+			this.ctx.fillStyle = this.color;
+			this.ctx.fillRect(
 				this.x * TILE_SIZE, 
 				this.y * TILE_SIZE, 
 				TILE_SIZE, 
@@ -237,6 +242,10 @@
 
 			$('#button-clear').on('click', function(e) {
 				oGrid.clear();
+			});			
+
+			$('#button-save').on('click', function(e) {
+				oGrid.save();
 			});
 
 			$(picker).on('click', function(e) {
