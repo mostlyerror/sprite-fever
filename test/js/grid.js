@@ -1,4 +1,6 @@
 var MyGrid = ( function(window) {
+
+	// Grid
 	function Grid(el, width, height) {
 		this.el = el;
 		this.ctx = el.getContext("2d");
@@ -8,19 +10,20 @@ var MyGrid = ( function(window) {
 	}
 
 	Grid.prototype.initialize = function(render) {
-		// create empty Tile objects
 		for (var r = 0; r < this.height; r++) {
 			this.tiles[r] = {};
 			for (var c = 0; c < this.width; c++) {
-				if (render) {
-					var t = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2], this.ctx);
-					this.tiles[r][c] = t;
-					t.render();
-				} else {
-					var t = new Tile(c, r, null, this.ctx);
-					this.tiles[r][c] = t;
-				}
+				var t = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2], this.ctx);
+				this.tiles[r][c] = t;
 			}
+		}
+	}
+
+	Grid.prototype.draw = function() {
+		for (var x in this.tiles) {
+			for (var y in this.tiles[x]) {
+				this.tiles[x][y].render('draw');
+			}	
 		}
 	}
 
@@ -32,6 +35,7 @@ var MyGrid = ( function(window) {
 		console.log(this.el.toDataURL());
 	}
 
+	// Tile
 	function Tile(x, y, color, ctx) {
 		this.x = x;
 		this.y = y;
@@ -40,20 +44,25 @@ var MyGrid = ( function(window) {
 		this.ctx = ctx;
 	}
 
-	Tile.prototype.render = function() {
+	Tile.prototype.render = function(action) {
+		if (action == 'draw') {
+			this.draw();
+		} else if (action == 'erase') {
+			this.erase();
+		}
+	};
+
+	Tile.prototype.draw = function() {
 		this.ctx.fillStyle = this.color;
-		this.ctx.fillRect(
-			this.x * TILE_SIZE, 
-			this.y * TILE_SIZE, 
-			TILE_SIZE, 
-			TILE_SIZE);
+		this.ctx.fillRect(this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 	};
 
 	Tile.prototype.erase = function() {
-		this.ctx.clearRect(this.x, this.y, TILE_SIZE, TILE_SIZE)
-	} 	
+		this.ctx.clearRect(this.x, this.y, TILE_SIZE, TILE_SIZE);
+	};	
 
 	return {
 		grid: Grid
 	}
+
 })( window );

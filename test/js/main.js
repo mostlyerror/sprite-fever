@@ -45,17 +45,20 @@ var colorCounter = 0;
 $(function(){
 
 	var Grid = MyGrid.grid;
-
 	var bgGrid = new Grid(bg, GRID_X, GRID_Y);
 	var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
-	var pGrid  = new Grid(overlay, GRID_X, GRID_Y);
+	// var pGrid  = new Grid(overlay, GRID_X, GRID_Y);
 
 	bgGrid.initialize(true);
 	oGrid.initialize();
+	bgGrid.draw();
 
 	var $bg      = $(bg);
 	var $overlay = $(overlay);
-	var $preview = $(preview);
+	// var $preview = $(preview);
+	var $picker  = $(picker);
+
+	var action;
 
 	$('#button-clear').on('click', function(e) {
 		oGrid.clear();
@@ -65,7 +68,7 @@ $(function(){
 		oGrid.save();
 	});
 
-	$(picker).on('click', function(e) {
+	$picker.on('click', function(e) {
 		selectedColor = getPixelColor(e.offsetX, e.offsetY);
 		updateSwatches();
 	});
@@ -73,14 +76,14 @@ $(function(){
 	$overlay.on('mousedown', function(e) {
 		e.preventDefault();
 
+		var action = e.which == 1 ? 'draw' : 'erase';
+
 		var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
 		var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
 
 		var tile = oGrid.tiles[gridY][gridX];
-		var ptile = oGrid.tiles[gridY][gridX];
-		tile.color = ptile.color = selectedColor;
-		tile.render();
-		ptile.render();
+		tile.color = selectedColor;
+		tile.render(action, tile.color);
 		
 		$(this).on('mousemove', function(e) {
 			e.preventDefault();
@@ -93,9 +96,8 @@ $(function(){
 
 			if (gridX !== lastX || gridY !== lastY) {
 				var tile = oGrid.tiles[gridY][gridX];
-				tile.fillColor = ptile.fillColor = selectedColor;
-				tile.render(tile.fillColor);
-				ptile.render(ptile.fillColor);
+				tile.color = selectedColor;
+				tile.render('draw');
 			}
 
 			$(this).on('mouseout', function(e) { 
@@ -118,28 +120,15 @@ $(function(){
 		var rgba = pickerCTX.getImageData(x, y, 1, 1).data;
 		return "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+rgba[3]+")";
 	}
-
-	// this doesn't actually, really lighten stuff?
-	// but it does some cool/strange stuff
+	// this doesn't actually, really lighten stuff!
+	// but it does some weird/strange stuff (cool)
 	function rgbaLighten(str, mult) {
-		// parse an 'rgba(r,g,b,a)' string
-		// return an array of integers as strings;
 		str = str.substring(5, str.length-1).split(',');
-		// find the 0 color value and update;
 		str[str.indexOf('0')] = mult * SWATCH_LIGHTNESS_STEP;
-		// rebuild the rgba string
-		// console.log(str);
-		// console.log("rgba(" + str.join(',') + ")");
 		return "rgba(" + str.join(',') + ")";
 	}
 
 	function updateSwatches() {
-		// loop over numSwatches
-		// concat class string
-		// calculate the rgba code
-		// update swatch bgcolor
-			// find which rgb value is zero
-			// increment by 255/9?
 		var klass = ".swatch-";
 		for (var i = 0; i < NUM_SWATCHES; i++) {
 			var $swatch = $(klass + i);
