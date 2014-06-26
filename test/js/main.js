@@ -1,5 +1,3 @@
-// main.js
-
 // Constants(for now)
 const TILE_SIZE = 30;
 const GRID_X = 16;
@@ -47,7 +45,6 @@ $(function(){
 	var Grid = MyGrid.grid;
 	var bgGrid = new Grid(bg, GRID_X, GRID_Y);
 	var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
-	// var pGrid  = new Grid(overlay, GRID_X, GRID_Y);
 
 	bgGrid.initialize(true);
 	oGrid.initialize();
@@ -55,9 +52,7 @@ $(function(){
 
 	var $bg      = $(bg);
 	var $overlay = $(overlay);
-	// var $preview = $(preview);
 	var $picker  = $(picker);
-
 	var action;
 
 	$('#button-clear').on('click', function(e) {
@@ -73,31 +68,31 @@ $(function(){
 		updateSwatches();
 	});
 
+	$overlay.on('contextmenu', function(e) {
+		e.preventDefault();
+	});
+
 	$overlay.on('mousedown', function(e) {
 		e.preventDefault();
 
-		var action = e.which == 1 ? 'draw' : 'erase';
+		if (e.which == 3) return false;
 
-		var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
-		var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
+		var tile = getTile(e, oGrid);
+		drawTile(tile, 'draw');
 
-		var tile = oGrid.tiles[gridY][gridX];
-		tile.color = selectedColor;
-		tile.render(action, tile.color);
+		$(this).on('mouseup', function(e) {
+			$(this).unbind('mousemove');
+		});
 		
 		$(this).on('mousemove', function(e) {
 			e.preventDefault();
 
-			var lastX = gridX;
-			var lastY = gridY;
+			var currentTile = getTile(e, oGrid);
 
-			var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
-			var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
-
-			if (gridX !== lastX || gridY !== lastY) {
-				var tile = oGrid.tiles[gridY][gridX];
-				tile.color = selectedColor;
-				tile.render('draw');
+			if (currentTile.x !== tile.x || currentTile.y !== tile.x) {
+				var new_tile = oGrid.tiles[currentTile.y][currentTile.x];
+				new_tile.color = selectedColor;
+				new_tile.render('draw');
 			}
 
 			$(this).on('mouseout', function(e) { 
@@ -113,15 +108,25 @@ $(function(){
 		$('.swatch').on('click', function(e) {
 			selectedColor = $(this).css('background-color');
 		}); 
-
 	});
+
+	function getTile(e, grid) {
+		console.log(e);
+		var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
+		var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
+		return grid.tiles[gridY][gridX];
+	}
+
+	function drawTile(tile, action) {
+		tile.color = selectedColor;
+		tile.render(action, tile.color);
+	}
 
 	function getPixelColor(x, y) {
 		var rgba = pickerCTX.getImageData(x, y, 1, 1).data;
 		return "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+rgba[3]+")";
 	}
-	// this doesn't actually, really lighten stuff!
-	// but it does some weird/strange stuff (cool)
+
 	function rgbaLighten(str, mult) {
 		str = str.substring(5, str.length-1).split(',');
 		str[str.indexOf('0')] = mult * SWATCH_LIGHTNESS_STEP;
