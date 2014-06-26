@@ -47,10 +47,13 @@ var MyGrid = ( function(window) {
 			this.y * TILE_SIZE, 
 			TILE_SIZE, 
 			TILE_SIZE);
-	}; 	
+	};
+
+	Tile.prototype.erase = function() {
+		this.ctx.clearRect(this.x, this.y, TILE_SIZE, TILE_SIZE)
+	} 	
 
 	return {
 		grid: Grid
 	}
 })( window );
-
