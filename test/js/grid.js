@@ -48,6 +48,7 @@ var MyGrid = ( function(window) {
 		if (action == 'draw') {
 			this.draw();
 		} else if (action == 'erase') {
+			console.log("Tile.render w/ 'erase' called");
 			this.erase();
 		}
 	};
@@ -58,7 +59,7 @@ var MyGrid = ( function(window) {
 	};
 
 	Tile.prototype.erase = function() {
-		this.ctx.clearRect(this.x, this.y, TILE_SIZE, TILE_SIZE);
+		this.ctx.clearRect(this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 	};	
 
 	return {

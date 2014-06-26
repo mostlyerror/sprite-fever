@@ -46,6 +46,9 @@ $(function(){
 	var bgGrid = new Grid(bg, GRID_X, GRID_Y);
 	var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
 
+	window.oGrid = oGrid; //debug
+	window.drawTile = drawTile; //debug
+
 	bgGrid.initialize(true);
 	oGrid.initialize();
 	bgGrid.draw();
@@ -53,15 +56,9 @@ $(function(){
 	var $bg      = $(bg);
 	var $overlay = $(overlay);
 	var $picker  = $(picker);
-	var action;
 
-	$('#button-clear').on('click', function(e) {
-		oGrid.clear();
-	});			
-
-	$('#button-save').on('click', function(e) {
-		oGrid.save();
-	});
+	$('#button-clear').on('click', function(e) { oGrid.clear() });			
+	$('#button-save').on('click', function(e) { oGrid.save() });
 
 	$picker.on('click', function(e) {
 		selectedColor = getPixelColor(e.offsetX, e.offsetY);
@@ -70,20 +67,17 @@ $(function(){
 
 	$overlay.on('contextmenu', function(e) {
 		e.preventDefault();
+		drawTile(getTile(e, oGrid), 'erase');
 	});
 
 	$overlay.on('mousedown', function(e) {
 		e.preventDefault();
 
-		if (e.which == 3) return false;
-
 		var tile = getTile(e, oGrid);
 		drawTile(tile, 'draw');
 
-		$(this).on('mouseup', function(e) {
-			$(this).unbind('mousemove');
-		});
-		
+		$(this).on('mouseup', function(e) {$(this).unbind('mousemove'); });
+
 		$(this).on('mousemove', function(e) {
 			e.preventDefault();
 
@@ -95,13 +89,8 @@ $(function(){
 				new_tile.render('draw');
 			}
 
-			$(this).on('mouseout', function(e) { 
-				$(this).off('mousemove');
-			});
-
-			$(this).on('mouseup', function(e) {
-				$(this).unbind('mousemove');
-			});
+			$(this).on('mouseout', function(e) {$(this).off('mousemove')});
+			$(this).on('mouseup', function(e) {$(this).unbind('mousemove')});
 
 		});
 
@@ -111,15 +100,14 @@ $(function(){
 	});
 
 	function getTile(e, grid) {
-		console.log(e);
 		var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
 		var gridY = Math.floor((e.offsetY - 1)/ TILE_SIZE);
 		return grid.tiles[gridY][gridX];
 	}
 
-	function drawTile(tile, action) {
-		tile.color = selectedColor;
-		tile.render(action, tile.color);
+	function drawTile(t, action) {
+		t.color = selectedColor;
+		t.render(action, t.color);
 	}
 
 	function getPixelColor(x, y) {
