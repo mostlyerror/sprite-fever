@@ -1,3 +1,4 @@
+
 // Constants(for now)
 const TILE_SIZE = 30;
 const GRID_X = 16;
@@ -8,57 +9,67 @@ const LIGHT_GREY  = 'rgba(200, 200, 200, 1)';
 const WHITE = 'rgba(255, 255, 255, 1)';
 const GRID_BG_COLORS = [LIGHT_GREY, WHITE];
 
-// Editor Canvases
-var overlay = document.getElementById("overlay");
-var preview = document.getElementById("preview");
-var bg      = document.getElementById("bg");
-var bgCTX   = bg.getContext("2d");
-var oCTX    = overlay.getContext("2d");
-var pCTX    = oCTX.translate(overlay.width, overlay.height); //wtf does this even do
-bg.width    = overlay.width  = TILE_SIZE * GRID_X;
-bg.height   = overlay.height = TILE_SIZE * GRID_Y;
+$(document).ready(function() {
 
-// Color Picker & Swatches
-var picker    = document.getElementById("color-picker-canvas");
-var pickerCTX = picker.getContext("2d");
-var swatches  = document.querySelectorAll('.swatch');
-var swatchParent = document.querySelector('.swatch').parentNode;
+	// Editor Canvases
+	var overlay = document.getElementById("overlay");
+	var preview = document.getElementById("preview");
+	var bg      = document.getElementById("bg");
+	// var oCTX    = overlay.getContext("2d");
+	// var pCTX    = preview.getContext("2d");
+	// var bgCTX   = bg.getContext("2d");
+	bg.width    = overlay.width  = TILE_SIZE * GRID_X;
+	bg.height   = overlay.height = TILE_SIZE * GRID_Y;
+	preview.width  = TILE_SIZE * GRID_X;
+	preview.height = TILE_SIZE * GRID_Y;
 
-// resize picker & swatches
-picker.width  = $(picker.parentNode).width();
-picker.height = 255;
-$('.swatch').width($(swatchParent).width() / swatches.length);
-var colorMap = new Image();
-colorMap.onload = function() {
-	pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
-};
-colorMap.crossOrigin = "anonymous"; // CORS bullshit
-colorMap.src = "http://localhost:8000/map-saturation.png"; // CORS bullshit
-var colorPickerData = pickerCTX.getImageData(0, 0, picker.width, picker.height);
+	// Color Picker & Swatches
+	var picker    = document.getElementById("color-picker-canvas");
+	var pickerCTX = picker.getContext("2d");
+	var swatches  = document.querySelectorAll('.swatch');
+	var swatchParent = document.querySelector('.swatch').parentNode;
 
-// Color Variables
-var selectedColor = 'rgba(0,0,0,1)';
-var colorCounter = 0;
+	// resize picker & swatches
+	picker.width  = $(picker.parentNode).width();
+	picker.height = 255;
+	$('.swatch').width($(swatchParent).width() / swatches.length);
+	var colorMap = new Image();
+	colorMap.onload = function() {
+		pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
+	};
+	colorMap.crossOrigin = "anonymous"; // CORS bullshit
+	colorMap.src = "http://localhost:8000/map-saturation.png"; // CORS bullshit
+	var colorPickerData = pickerCTX.getImageData(0, 0, picker.width, picker.height);
 
-$(function(){
+	// Color Variables
+	var selectedColor = 'rgba(0,0,0,1)';
+	var colorCounter = 0;
 
 	var Grid = MyGrid.grid;
-	var bgGrid = new Grid(bg, GRID_X, GRID_Y);
-	var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
+	var bgGrid = new Grid(bg, GRID_X, GRID_Y, 30);
+	var oGrid  = new Grid(overlay, GRID_X, GRID_Y, 30);
+	var pGrid  = new Grid(preview, GRID_X, GRID_Y, 13);
 
-	window.oGrid = oGrid; //debug
-	window.drawTile = drawTile; //debug
+	window.oGrid = oGrid;
+	window.pGrid = pGrid;
+	window.drawTile = drawTile; 
 
-	bgGrid.initialize(true);
-	oGrid.initialize();
+	bgGrid.init(true);
+	oGrid.init();
+	pGrid.init();
 	bgGrid.draw();
 
 	var $bg      = $(bg);
 	var $overlay = $(overlay);
 	var $picker  = $(picker);
+	var $preview = $(preview);
 
 	$('#button-clear').on('click', function(e) { oGrid.clear() });			
 	$('#button-save').on('click', function(e) { oGrid.save() });
+
+	$('.swatch').on('click', function(e) {
+		selectedColor = $(this).css('background-color');
+	}); 
 
 	$picker.on('click', function(e) {
 		selectedColor = getPixelColor(e.offsetX, e.offsetY);
@@ -73,14 +84,17 @@ $(function(){
 	$overlay.on('mousedown', function(e) {
 		e.preventDefault();
 
-		var tile = getTile(e, oGrid);
+		var tile  = getTile(e, oGrid);
+		var pTile = pGrid.tiles[tile.y][tile.x];
 		drawTile(tile, 'draw');
+		drawTile(pTile, 'draw');
 
-		$(this).on('mouseup', function(e) {$(this).unbind('mousemove'); });
+		$(this).on('mouseup', function(e) {
+			$(this).unbind('mousemove'); 
+		});
 
 		$(this).on('mousemove', function(e) {
 			e.preventDefault();
-
 			var currentTile = getTile(e, oGrid);
 
 			if (currentTile.x !== tile.x || currentTile.y !== tile.x) {
@@ -88,16 +102,20 @@ $(function(){
 				new_tile.color = selectedColor;
 				new_tile.render('draw');
 			}
-
 			$(this).on('mouseout', function(e) {$(this).off('mousemove')});
 			$(this).on('mouseup', function(e) {$(this).unbind('mousemove')});
-
 		});
-
-		$('.swatch').on('click', function(e) {
-			selectedColor = $(this).css('background-color');
-		}); 
 	});
+
+	function updatePreview() {
+		$.extend(pGrid.tiles, oGrid.tiles);
+		for (var row in pGrid.tiles) {
+			for (var col in pGrid.tiles[row]) {
+				pGrid.tiles[row][col].scale = pGrid.scale;
+			}
+		}
+		pGrid.draw('render');
+	}
 
 	function getTile(e, grid) {
 		var gridX = Math.floor((e.offsetX - 1)/ TILE_SIZE);
@@ -130,4 +148,3 @@ $(function(){
 		}
 	}
 });
-

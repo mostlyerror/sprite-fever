@@ -63,12 +63,17 @@ canvas {
 	border: 1px solid #fff;
 	height: 70px;
 }
-.preview {
+.preview-container {
+	position: relative;
 	border: 1px solid #fff;
 	height: 300px;
 }
 #preview {
+	position: absolute;
+	left: 20px;
+	top: 20px;
 	cursor: default;
+	clear: both;
 }
 .menu {
 	border: 1px solid #fff;
