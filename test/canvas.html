@@ -7,85 +7,11 @@
 	<title>Canvas Test</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/foundation.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
-<style>
-
-	body {
-		background-color: #444;
-	}
-	.container {
-		padding: 30px;
-		margin: 0 auto;
-		width: 1140px;
-	}
-	.grid-container {
-		position: relative;
-		clear: both;
-	}
-
-	/*Left Panel*/
-
-	#color-picker {
-		float: right;
-		border: 1px solid #ccc;
-		padding: 10px;
-		width: 100%;
-	}
-	#color-map {
-		background-image: url('map-saturation.png');
-		height: 255px;
-		width: 270px;
-	}
-	#swatch-container {
-		margin: 0;
-		font-size: 0; /*hack to remove space between swatches*/
-	}
-	.swatch {
-		display: inline-block;
-		height: 30px;
-		width: 30px;
-		background-color: #000;
-	}
-
-	/*Middle Panel*/
-	canvas {
-		cursor: crosshair;
-	}
-	#bg, #overlay {
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-	#bg {
-		border: 1px dotted #000;
-		z-index: 0;
-	}
-	#overlay {
-		border: 1px solid #fff;
-		z-index: 999;
-		opacity: 1;
-	}
-
-	/* Right Panel */
-	.controls {
-		border: 1px solid #fff;
-		height: 70px;
-	}
-	.preview {
-		border: 1px solid #fff;
-		height: 300px;
-	}
-	.preview canvas {
-		cursor: pointer;
-	}
-	.menu {
-		border: 1px solid #fff;
-	}
-</style>
 <body>
 	<div class="container">
 		<div class="row"> <!-- main row -->
-
 			<div id="left" class="columns large-3">
 				<div class="row">
 					<div id="color-picker">
@@ -125,7 +51,7 @@
 				<div class="row">
 					<div class="preview">
 						Preview
-						<canvas id="bg"></canvas>
+						<canvas id="preview"></canvas>
 					</div>
 				</div>
 				<div class="row">
@@ -138,6 +64,7 @@
 		</div> <!-- end main container row -->
 	</div>
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/grid.js"></script>
 	<script type="text/javascript">
 
 		// Constants(for now)
@@ -184,71 +111,16 @@
 		var selectedColor = 'rgba(0,0,0,1)';
 		var colorCounter = 0;
 
-		// Why would I ever have multiple grids..?
-		function Grid(el, width, height) {
-			this.el = el;
-			this.ctx = el.getContext("2d");
-			this.width = width;
-			this.height = height;
-			this.tiles = {};
-		}
-
-		Grid.prototype.initialize = function(render) {
-			// create empty Tile objects
-			for (var r = 0; r < this.height; r++) {
-				this.tiles[r] = {};
-				for (var c = 0; c < this.width; c++) {
-					if (render) {
-						var t = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2], this.ctx);
-						this.tiles[r][c] = t;
-						t.render();
-					} else {
-						var t = new Tile(c, r, null, this.ctx);
-						this.tiles[r][c] = t;
-					}
-				}
-			}
-		}
-
-		Grid.prototype.clear = function() {
-			this.ctx.clearRect(0, 0, this.el.width, this.el.height);
-		}
-
-		Grid.prototype.save = function() {
-			console.log(this.el.toDataURL());
-		}
-
-		function Tile(x, y, color, ctx) {
-			this.x = x;
-			this.y = y;
-			this.color = color;
-			this.empty = true;
-			this.ctx = ctx;
-		}
-
-		Tile.prototype.render = function() {
-			this.ctx.fillStyle = this.color;
-			this.ctx.fillRect(
-				this.x * TILE_SIZE, 
-				this.y * TILE_SIZE, 
-				TILE_SIZE, 
-				TILE_SIZE);
-		}; 	
-
-
 		$(function(){
 
+			var Grid = MyGrid.grid;
+			
 			var bgGrid = new Grid(bg, GRID_X, GRID_Y);
 			var oGrid  = new Grid(overlay, GRID_X, GRID_Y);
 			var pGrid  = new Grid(overlay, GRID_X, GRID_Y);
 
 			bgGrid.initialize(true);
 			oGrid.initialize();
-			// pGrid.initialize();
-
-			// for debugging
-			// window.bgGrid = bgGrid;
-			// window.oGrid = oGrid;
 
 			var $bg      = $(bg);
 			var $overlay = $(overlay);

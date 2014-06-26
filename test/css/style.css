@@ -1,0 +1,75 @@
+/*style.css*/
+
+body {
+	background-color: #444;
+}
+.container {
+	padding: 30px;
+	margin: 0 auto;
+	width: 1140px;
+}
+.grid-container {
+	position: relative;
+	clear: both;
+}
+
+/*Left Panel*/
+
+#color-picker {
+	float: right;
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 100%;
+}
+#color-map {
+	background-image: url('map-saturation.png');
+	height: 255px;
+	width: 270px;
+}
+#swatch-container {
+	margin: 0;
+	font-size: 0; /*hack to remove space between swatches*/
+}
+.swatch {
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	background-color: #000;
+}
+
+/*Middle Panel*/
+
+canvas {
+	cursor: crosshair;
+}
+#bg, #overlay {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#bg {
+	border: 1px dotted #000;
+	z-index: 0;
+}
+#overlay {
+	border: 1px solid #fff;
+	z-index: 999;
+	opacity: 1;
+}
+
+/* Right Panel */
+
+.controls {
+	border: 1px solid #fff;
+	height: 70px;
+}
+.preview {
+	border: 1px solid #fff;
+	height: 300px;
+}
+#preview {
+	cursor: default;
+}
+.menu {
+	border: 1px solid #fff;
+}
