@@ -2,6 +2,9 @@
 
 ## TODO
 
+Front End
+=========
+
 + Pixel Editor
     + persistence for saved sprites
     + toolbar
@@ -28,6 +31,17 @@
 + About "Page" -> this can really be a panel that slides in like the menu
 + "Nav"?
 
+Back End
+========
+
++ Set up Sinatra
++ Set up DB
+
+
 ## In the distant future..
 
 + Different "frames" so you can stitch together an animated gif before you go to "dance move processing"
++ Rotate
++ Marquee Selection
++ Fullscreen Mode Editor
++ Mirror Drawing

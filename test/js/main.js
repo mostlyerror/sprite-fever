@@ -12,9 +12,12 @@ const GRID_BG_COLORS = [LIGHT_GREY, WHITE];
 $(document).ready(function() {
 
 	// Editor Canvases
+	var myDataRef    = new Firebase('flickering-fire-2267.firebaseIO.com');
+	var spriteRef    = myDataRef.child('sprites');
+	
 	var overlay = document.getElementById("overlay");
-	var preview = document.getElementById("preview");
 	var bg      = document.getElementById("bg");
+	var preview = document.getElementById("preview");
 	// var oCTX    = overlay.getContext("2d");
 	// var pCTX    = preview.getContext("2d");
 	// var bgCTX   = bg.getContext("2d");
@@ -63,6 +66,7 @@ $(document).ready(function() {
 	var $overlay = $(overlay);
 	var $picker  = $(picker);
 	var $preview = $(preview);
+	var $name    = $('#name-input');
 
 	$('#button-clear').on('click', function(e) { 
 		oGrid.clear();
@@ -70,7 +74,9 @@ $(document).ready(function() {
 	});			
 
 	$('#button-save').on('click', function(e) { 
-		console.log(oGrid.save());
+		if (oGrid.save($name.val(), spriteRef)) {
+			$name.val('');
+		}
 	});
 
 	$('.swatch').on('click', function(e) {
