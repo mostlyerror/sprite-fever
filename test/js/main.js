@@ -88,16 +88,16 @@ $(document).ready(function() {
 		if (oGrid.save($name.val(), spriteRef)) $name.val('');
 	});
 
-	$('#button-resize').on('click', function(e) {
-		if (confirm('Erase grid  and change dimensions forrealz?')) {
-			var x = $gridSliderX.val();
-			var y = $gridSliderY.val();
-			resizeGrid(x, y, oGrid);
-			resizeGrid(x, y, pGrid);
-			resizeGrid(x, y, bgGrid);
-			bgGrid.draw();
-		}
-	});
+	// $('#button-resize').on('click', function(e) {
+	// 	if (confirm('Erase grid  and change dimensions forrealz?')) {
+	// 		var x = $gridSliderX.val();
+	// 		var y = $gridSliderY.val();
+	// 		resizeGrid(x, y, oGrid);
+	// 		resizeGrid(x, y, pGrid);
+	// 		resizeGrid(x, y, bgGrid);
+	// 		bgGrid.draw();
+	// 	}
+	// });
 
 	// DOM listeners
 
@@ -156,12 +156,12 @@ $(document).ready(function() {
 		el.html(x + ' x ' + y);
 	}
 
-	function resizeGrid(x, y, grid, render) {
-		grid.clear();
-		grid.width = x;
-		grid.height = y;
-		render ? grid.init(render) : grid.init();
-	}
+	// function resizeGrid(x, y, grid, render) {
+	// 	grid.clear();
+	// 	grid.width = x;
+	// 	grid.height = y;
+	// 	render ? grid.init(render) : grid.init();
+	// }
 
 	function updatePreview() {
 		$.extend(pGrid.tiles, oGrid.tiles);
