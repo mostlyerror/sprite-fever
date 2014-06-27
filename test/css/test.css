@@ -1,0 +1,89 @@
+/*style.css*/
+*{
+
+}
+
+
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+}
+
+@font-face { font-family: Fipps; src: url('Fipps-Regular.otf');}
+
+}
+
+.container {
+  padding: 30px;
+  margin: 0 auto;
+  width: 1140px;
+}
+.grid-container {
+  position: relative;
+  clear: both;
+}
+/*.title{
+ display: block;
+  margin: auto;
+}
+*/
+/*div{
+    border: 0;
+     width: 100%;
+     height: auto;*/
+}
+
+.menu{
+  display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+    border: red 2px solid;
+    }
+
+#dance{
+  border: 0;
+  width: auto;
+  height: auto;
+  position: relative;
+
+}
+
+#editor{
+  border: 0;
+  width: auto;
+  height: auto;
+  position: relative;
+
+}
+
+.title{
+  border: 0;
+  width: 100%;
+  height: auto;
+  position: relative;
+
+}
+
+.filler{
+  height: 100px;
+  position: relative;
+}
+
+.row{
+  position: relative;
+}
+
