@@ -6,30 +6,33 @@ Front End
 =========
 
 + Pixel Editor
-    + persistence for saved sprites
-    + toolbar
-        + eraser
-        	+ maybe i can just right click to erase..
-        + color sampler
-    + grid size slider
+    + persistence for saved sprites        
     + transition animations (panels)
+    + Fix swatches
+    + Implement Color Palette
+
 + Dance Move Editor
 	+ some dance moves..?
 	+ apply to preview
 	+ save
-		+ canvas resize to min/max pixel bounds (reduce png size)
 	+ transition panels
 
 + Front Page
 	+ title
+	+ bg
 	+ menu
 		+ link -> editor
 		+ link -> dance partay
 		+ transition animations
-+ DANCE PARTY
-	+ fuckload of animations
+
++ Dance Party
+	+ animations
+	+ hover effects
+	+ musics
+
 + About "Page" -> this can really be a panel that slides in like the menu
-+ "Nav"?
+
++ "Nav"? (is necesssary? dunno) - really just need a way to display about page, and get back to home
 
 Back End
 ========
@@ -37,11 +40,14 @@ Back End
 + Set up Sinatra
 + Set up DB
 
-
 ## In the distant future..
 
-+ Different "frames" so you can stitch together an animated gif before you go to "dance move processing"
-+ Rotate
-+ Marquee Selection
-+ Fullscreen Mode Editor
-+ Mirror Drawing
++ pixel editor: grid size slider
++ pixel toolbar: eraser
++ pixel toolbar: color sampler
++ pixel editor: frameset for animated gifs
++ pixel editor: fullscreen mode
++ pixel editor: Marquee Selection
++ pixel editor: Rotate
++ pixel editor: Mirror Drawing
++ animation editor: sprite save: canvas resize to min/max pixel bounds (reduce png size)
