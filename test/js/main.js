@@ -64,8 +64,14 @@ $(document).ready(function() {
 	var $picker  = $(picker);
 	var $preview = $(preview);
 
-	$('#button-clear').on('click', function(e) { oGrid.clear() });			
-	$('#button-save').on('click', function(e) { oGrid.save() });
+	$('#button-clear').on('click', function(e) { 
+		oGrid.clear();
+		pGrid.clear();
+	});			
+
+	$('#button-save').on('click', function(e) { 
+		console.log(oGrid.save());
+	});
 
 	$('.swatch').on('click', function(e) {
 		selectedColor = $(this).css('background-color');
@@ -79,6 +85,7 @@ $(document).ready(function() {
 	$overlay.on('contextmenu', function(e) {
 		e.preventDefault();
 		drawTile(getTile(e, oGrid), 'erase');
+		drawTile(getTile(e, pGrid), 'erase');
 	});
 
 	$overlay.on('mousedown', function(e) {
@@ -101,7 +108,7 @@ $(document).ready(function() {
 				var newTile = oGrid.tiles[currentTile.y][currentTile.x];
 				var newPTile = pGrid.tiles[currentTile.y][currentTile.x];
 				newTile.color = selectedColor;
-				// new_tile.render('draw');
+
 				drawTile(newTile, 'draw');
 				drawTile(newPTile, 'draw');
 			}

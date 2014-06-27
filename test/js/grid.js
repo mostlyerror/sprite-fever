@@ -33,7 +33,7 @@ var MyGrid = ( function(window) {
 	}
 
 	Grid.prototype.save = function() {
-		console.log(this.el.toDataURL());
+		return this.el.toDataURL();
 	}
 
 	// Tile
