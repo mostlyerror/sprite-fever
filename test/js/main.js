@@ -98,9 +98,12 @@ $(document).ready(function() {
 			var currentTile = getTile(e, oGrid);
 
 			if (currentTile.x !== tile.x || currentTile.y !== tile.x) {
-				var new_tile = oGrid.tiles[currentTile.y][currentTile.x];
-				new_tile.color = selectedColor;
-				new_tile.render('draw');
+				var newTile = oGrid.tiles[currentTile.y][currentTile.x];
+				var newPTile = pGrid.tiles[currentTile.y][currentTile.x];
+				newTile.color = selectedColor;
+				// new_tile.render('draw');
+				drawTile(newTile, 'draw');
+				drawTile(newPTile, 'draw');
 			}
 			$(this).on('mouseout', function(e) {$(this).off('mousemove')});
 			$(this).on('mouseup', function(e) {$(this).unbind('mousemove')});
