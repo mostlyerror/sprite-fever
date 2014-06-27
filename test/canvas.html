@@ -48,7 +48,21 @@
 			</div>
 			<div id="right"class="columns large-3">
 				<div class="row">
-					<div class="controls">Controls</div>
+					<div class="controls">
+						<div class="controls-row">
+							<div class="controls-sliders">
+								<p>Grid X <input id="input-grid-slider-x" type="range" min="8" max="64" step="8" value="16"></p>
+								<p>Grid Y <input id="input-grid-slider-y" type="range" min="8" max="64" step="8" value="16"></p>
+							</div>
+							<div class="grid-dimensions"></div>
+						</div>
+						<div>
+							<div class="controls-grid-dimensions">
+								<button id="button-resize">re-size grid</button>
+								<span class="resize-note-text">Note: you'll lose your work!</span>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="row">
 					<div class="preview-container">
@@ -57,7 +71,7 @@
 				</div>
 				<div class="row">
 					<div class="menu">
-						<button id="button-save" class="button save">Save</button>
+						<button id="button-save" class="button save">save</button>
 					</div>
 				</div>
 			</div>

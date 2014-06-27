@@ -2,15 +2,15 @@
 
 body {
 	background-color: #444;
+	color: #fff;
 }
 .container {
 	padding: 30px;
 	margin: 0 auto;
 	width: 1140px;
 }
-.grid-container {
-	position: relative;
-	clear: both;
+button {
+	color: #000;
 }
 
 /*Left Panel*/
@@ -39,6 +39,10 @@ body {
 
 /*Middle Panel*/
 
+.grid-container {
+	position: relative;
+	clear: both;
+}
 canvas {
 	cursor: crosshair;
 }
@@ -48,7 +52,7 @@ canvas {
 	top: 0;
 }
 #bg {
-	border: 1px dotted #000;
+	/*border: 1px dotted #000;*/
 	z-index: 0;
 }
 #overlay {
@@ -60,21 +64,25 @@ canvas {
 /* Right Panel */
 
 .controls {
-	border: 1px solid #fff;
-	height: 70px;
+	/*border: 1px solid #fff;*/
+	font-size: 12px;
+}
+.controls-row {
+	width: 100%;
+	float: left;
 }
 .preview-container {
-	position: relative;
-	border: 1px solid #fff;
+	/*position: relative;*/
+	/*border: 1px solid #fff;*/
 	height: 300px;
 }
 #preview {
-	position: absolute;
+	position: relative;
 	left: 20px;
 	top: 20px;
 	cursor: default;
-	clear: both;
+	/*clear: both;*/
 }
 .menu {
-	border: 1px solid #fff;
+	/*border: 1px solid #fff;*/
 }
