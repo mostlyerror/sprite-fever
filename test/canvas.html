@@ -1,84 +1,106 @@
-<!-- canvas.html -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en" >
 <head>
-	<meta charset="UTF-8">
-	<title>Canvas Test</title>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/foundation.css">
-	<link rel="stylesheet" href="css/style.css">
-	<script src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div id="left" class="columns large-3">
-				<div class="row">
-					<div id="color-picker">
-						<canvas id="color-picker-canvas"></canvas>
-						<div id="swatch-container">
-							<div class="swatch swatch-0"></div>
-							<div class="swatch swatch-1"></div>
-							<div class="swatch swatch-2"></div>
-							<div class="swatch swatch-3"></div>
-							<div class="swatch swatch-4"></div>
-							<div class="swatch swatch-5"></div>
-							<div class="swatch swatch-6"></div>
-							<div class="swatch swatch-7"></div>
-							<div class="swatch swatch-8"></div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div id="toolbar">
-						<button id="button-clear" class="button clear">clear</button>
-					</div>
-				</div>
-			</div>
-			<div id="middle" class="columns large-5">
-				<div class="name-container">
-					<input id="name-input" type="text" placeholder="Name me...">
-				</div>
-				<div class="grid-container">
-					<canvas id="overlay"></canvas>		
-					<canvas id="bg"></canvas>
-				</div>
-			</div>
-			<div id="right"class="columns large-3">
-				<div class="row">
-					<div class="controls">
-						<div class="controls-row">
-							<div class="controls-sliders">
-								<p>Grid X <input id="input-grid-slider-x" type="range" min="8" max="64" step="8" value="16"></p>
-								<p>Grid Y <input id="input-grid-slider-y" type="range" min="8" max="64" step="8" value="16"></p>
-							</div>
-							<div class="grid-dimensions"></div>
-						</div>
-						<div>
-							<div class="controls-grid-dimensions">
-								<button id="button-resize">re-size grid</button>
-								<span class="resize-note-text">Note: you'll lose your work!</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="preview-container">
-						<canvas id="preview"></canvas>
-					</div>
-				</div>
-				<div class="row">
-					<div class="menu">
-						<button id="button-save" class="button save">save</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/grid.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+  <nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Sprite Fever</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="has-dropdown">
+        <a href="#">Menu</a>
+        <ul class="dropdown">
+          <li><a href="test.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="left large-3">
+        <div class="row">
+          <div><span>Colors</span></div>
+          <div id="color-picker">
+            <canvas id="color-picker-canvas"></canvas>
+            <div id="swatch-container">
+              <div class="swatch swatch-0"></div>
+              <div class="swatch swatch-1"></div>
+              <div class="swatch swatch-2"></div>
+              <div class="swatch swatch-3"></div>
+              <div class="swatch swatch-4"></div>
+              <div class="swatch swatch-5"></div>
+              <div class="swatch swatch-6"></div>
+              <div class="swatch swatch-7"></div>
+              <div class="swatch swatch-8"></div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row"> -->
+          <div id="toolbar">
+            <button id="button-clear" class="button clear">clear</button>
+          </div>
+        <!-- </div> -->
+      </div>
+      <div class="columns large-5 medium-5 small-5">
+
+        <div class="grid-container">
+          <canvas id="overlay"></canvas>
+          <canvas id="bg"></canvas>
+        </div>
+      </div>
+      <div id="right"class="columns large-3 medium-3 small-3 right">
+        <div class="row">
+          <div class="control"><span>Preview</span></div>
+        </div>
+
+        <div class="row">
+          <div class="preview-container">
+            <canvas id="preview"></canvas>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="name-container">
+          <input id="name-input" type="text" placeholder="Name me...">
+          <button id="button-save" class="button save">Save</button>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/grid.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script src="js/foundation/jquery.js"></script>
+<script src="js/foundation/foundation.js"></script>
+<script src="js/foundation/foundation.dropdown.js"></script>
 </body>
 </html>
+
+
+
+
+
+
