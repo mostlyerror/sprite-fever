@@ -81,10 +81,10 @@ html {
 
 .dancer-container{
 position: absolute;
-/*border: 2px red solid;*/
+border: 2px red solid;
 height: 200px;
 width: 200px;
-bottom: -500px;
+top: 400px;
 margin: -100px 0 0 -150px;
 left: 50%;
 z-index: 15;
@@ -103,4 +103,23 @@ height: 200px;
   position: relative;
 
   width: 400px;
+}
+
+.contact-header{
+  color:white;
+
+}
+.contact{
+color: white;
+  width: 50%;
+  margin:auto;
+  font-size: 20px;
+}
+
+.names{
+  color: white;
+  text-decoration: none;
+}
+label{
+color: #fff;
 }

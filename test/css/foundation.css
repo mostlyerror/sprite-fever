@@ -2596,7 +2596,7 @@ td {
 
 /* Default Link Styles */
 a {
-  color: #008cba;
+  color: #fff;
   text-decoration: none;
   line-height: inherit; }
   a:hover, a:focus {
@@ -2835,7 +2835,7 @@ blockquote p {
 
   a,
   a:visited {
-    text-decoration: underline; }
+    text-decoration: none; }
 
   a[href]:after {
     content: " (" attr(href) ")"; }
