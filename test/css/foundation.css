@@ -40,6 +40,10 @@ html,
 body {
   font-size: 100%; }
 
+  span{
+    color:white;
+  }
+
 body {
   background: url("../images/bg/jpg");
   color: #222222;
