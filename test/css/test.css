@@ -81,7 +81,7 @@ html {
 
 .dancer-container{
 position: absolute;
-border: 2px red solid;
+/*border: 2px red solid;*/
 height: 200px;
 width: 200px;
 top: 400px;
