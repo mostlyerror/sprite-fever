@@ -16,10 +16,10 @@ body {
 /*Left Panel*/
 
 #color-picker {
-	float: right;
 	border: 1px solid #ccc;
 	padding: 10px;
-	width: 100%;
+	width: auto;
+	margin-left: 0px;
 }
 #color-map {
 	background-image: url('map-saturation.png');
@@ -59,15 +59,15 @@ canvas {
 
 /* Right Panel */
 
-.controls {
-	border: 1px solid #fff;
-	height: 70px;
-}
+
+
 .preview-container {
 	position: relative;
 	border: 1px solid #fff;
 	height: 300px;
+	width:300px;
 }
+
 #preview {
 	position: absolute;
 	left: 20px;
@@ -75,6 +75,6 @@ canvas {
 	cursor: default;
 	clear: both;
 }
-.menu {
-	border: 1px solid #fff;
-}
+
+
+

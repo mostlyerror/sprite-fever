@@ -1,29 +1,10 @@
 /*style.css*/
-*{
-
-}
-
-
-#bg {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-}
-#bg img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  min-width: 50%;
-  min-height: 50%;
-}
 
 @font-face { font-family: Fipps; src: url('Fipps-Regular.otf');}
+@font-face { font-family: Minecraftia; src: url('Minecraftia.ttf');}
 
+body{
+  font-family: Minecraftia;
 }
 
 .container {
@@ -38,12 +19,12 @@
 /*.title{
  display: block;
   margin: auto;
-}
-*/
-/*div{
+}*/
+
+div{
     border: 0;
      width: 100%;
-     height: auto;*/
+     height: auto;
 }
 
 .menu{
@@ -86,4 +67,40 @@
 .row{
   position: relative;
 }
+/*body{
+  background-image: url("../images/bg.jpg");
+  background-repeat: no-repeat;
+}*/
+html {
+  background: url("../images/bg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
+.dancer-container{
+position: absolute;
+/*border: 2px red solid;*/
+height: 200px;
+width: 200px;
+bottom: -500px;
+margin: -100px 0 0 -150px;
+left: 50%;
+z-index: 15;
+
+
+}
+
+.dancer{
+position: relative;
+width: 200px;
+height: 200px;
+}
+
+.moves-container{
+  float: right;
+  position: relative;
+
+  width: 400px;
+}

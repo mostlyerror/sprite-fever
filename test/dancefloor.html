@@ -9,15 +9,47 @@
   <link rel="stylesheet" href="css/test.css">
 </head>
 <body>
-<div id="bg">
-  <img src="images/bg.jpg" alt="">
+  <nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Sprite Fever</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="has-dropdown">
+        <a href="#">Menu</a>
+        <ul class="dropdown">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Sprites</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">About</a></li>
+
+        </ul>
+      </li>
+    </ul>
+<div class="dancer-container">
+  <div class="dancer">
+    <img class="dancer" src="../test/images/mario.png" alt="">
+  </div>
+</div>
+<div class="moves-container">
+  <form method="post">
+        <select name="Dance Moves">
+                <option value="bounce">Bounce</option>
+                <option value="shake">Shake</option>
+                <option value="wobble">Wobble</option>
+                <option value="swing">Swing</option>
+        </select>
+  </form>
 </div>
 
 
 
-
-
-
-
+<script src="js/foundation/jquery.js"></script>
+<script src="js/foundation/foundation.js"></script>
+<script src="js/foundation/foundation.dropdown.js"></script>
 </body>
 </html>
