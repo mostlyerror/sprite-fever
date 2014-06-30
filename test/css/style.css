@@ -40,8 +40,10 @@ body {
 /*Middle Panel*/
 
 canvas {
-	cursor: crosshair;
+	cursor: url('../images/cursor.cur'), auto;
 }
+
+
 #bg, #overlay {
 	position: absolute;
 	left: 0;

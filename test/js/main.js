@@ -14,10 +14,11 @@ $(document).ready(function() {
 	// Editor Canvases
 	var myDataRef    = new Firebase('flickering-fire-2267.firebaseIO.com');
 	var spriteRef    = myDataRef.child('sprites');
-	
+
 	var overlay = document.getElementById("overlay");
 	var bg      = document.getElementById("bg");
 	var preview = document.getElementById("preview");
+
 	// var oCTX    = overlay.getContext("2d");
 	// var pCTX    = preview.getContext("2d");
 	// var bgCTX   = bg.getContext("2d");
@@ -55,7 +56,7 @@ $(document).ready(function() {
 
 	window.oGrid = oGrid;
 	window.pGrid = pGrid;
-	window.drawTile = drawTile; 
+	window.drawTile = drawTile;
 
 	bgGrid.init(true);
 	oGrid.init();
@@ -68,12 +69,12 @@ $(document).ready(function() {
 	var $preview = $(preview);
 	var $name    = $('#name-input');
 
-	$('#button-clear').on('click', function(e) { 
+	$('#button-clear').on('click', function(e) {
 		oGrid.clear();
 		pGrid.clear();
-	});			
+	});
 
-	$('#button-save').on('click', function(e) { 
+	$('#button-save').on('click', function(e) {
 		if (oGrid.save($name.val(), spriteRef)) {
 			$name.val('');
 		}
@@ -81,7 +82,7 @@ $(document).ready(function() {
 
 	$('.swatch').on('click', function(e) {
 		selectedColor = $(this).css('background-color');
-	}); 
+	});
 
 	$picker.on('click', function(e) {
 		selectedColor = getPixelColor(e.offsetX, e.offsetY);
@@ -103,7 +104,7 @@ $(document).ready(function() {
 		drawTile(pTile, 'draw');
 
 		$(this).on('mouseup', function(e) {
-			$(this).unbind('mousemove'); 
+			$(this).unbind('mousemove');
 		});
 
 		$(this).on('mousemove', function(e) {
