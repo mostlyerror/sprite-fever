@@ -74,6 +74,7 @@ canvas {
 	top: 20px;
 	cursor: default;
 	clear: both;
+	z-index: -1;
 }
 
 

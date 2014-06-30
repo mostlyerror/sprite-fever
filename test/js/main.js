@@ -42,7 +42,7 @@ $(document).ready(function() {
 		pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
 	};
 	colorMap.crossOrigin = "anonymous"; // CORS bullshit
-	colorMap.src = "http://localhost:8000/map-saturation.png"; // CORS bullshit
+	colorMap.src = "http://localhost:8000/images/map-saturation.png"; // CORS bullshit
 	var colorPickerData = pickerCTX.getImageData(0, 0, picker.width, picker.height);
 
 	// Controls
