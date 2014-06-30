@@ -33,7 +33,8 @@ $(document).ready(function() {
 	var swatches  = document.querySelectorAll('.swatch');
 	var swatchParent = document.querySelector('.swatch').parentNode;
 
-	// resize picker & swatches
+
+	// adjust size of picker & swatches
 	picker.width  = $(picker.parentNode).width();
 	picker.height = 255;
 	$('.swatch').width($(swatchParent).width() / swatches.length);
@@ -42,8 +43,15 @@ $(document).ready(function() {
 		pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
 	};
 	colorMap.crossOrigin = "anonymous"; // CORS bullshit
-	colorMap.src = "http://localhost:8000/map-saturation.png"; // CORS bullshit
+	colorMap.src = "http://localhost:8000/images/map-saturation.png"; // CORS bullshit
 	var colorPickerData = pickerCTX.getImageData(0, 0, picker.width, picker.height);
+
+	// Controls
+	// var gridSliderX  = document.getElementById("input-grid-slider-x");
+	// var gridSliderY  = document.getElementById("input-grid-slider-y");
+	var $gridSliderX = $('#gridSliderX');
+	var $gridSliderY = $('#gridSliderY');
+	var $dimensions  = $('.grid-dimensions');
 
 	// Color Variables
 	var selectedColor = 'rgba(0,0,0,1)';
@@ -57,8 +65,11 @@ $(document).ready(function() {
 	window.oGrid = oGrid;
 	window.pGrid = pGrid;
 	window.drawTile = drawTile;
+	window.bgGrid = bgGrid;
+	window.drawTile = drawTile;
 
-	bgGrid.init(true);
+
+	bgGrid.init();
 	oGrid.init();
 	pGrid.init();
 	bgGrid.draw();
@@ -69,7 +80,13 @@ $(document).ready(function() {
 	var $preview = $(preview);
 	var $name    = $('#name-input');
 
+
 	$('#button-clear').on('click', function(e) {
+
+	// button listeners
+
+	$('#button-clear').on('click', function(e) {
+
 		oGrid.clear();
 		pGrid.clear();
 	});
@@ -78,6 +95,28 @@ $(document).ready(function() {
 		if (oGrid.save($name.val(), spriteRef)) {
 			$name.val('');
 		}
+
+	$('#button-save').on('click', function(e) {
+		if (oGrid.save($name.val(), spriteRef)) $name.val('');
+	});
+
+	// $('#button-resize').on('click', function(e) {
+	// 	if (confirm('Erase grid  and change dimensions forrealz?')) {
+	// 		var x = $gridSliderX.val();
+	// 		var y = $gridSliderY.val();
+	// 		resizeGrid(x, y, oGrid);
+	// 		resizeGrid(x, y, pGrid);
+	// 		resizeGrid(x, y, bgGrid);
+	// 		bgGrid.draw();
+	// 	}
+	// });
+
+	// DOM listeners
+
+	$(".controls-sliders input").on('click', function(e) {
+		var x = $gridSliderX.val();
+		var y = $gridSliderY.val();
+		updateDimensions(x, y, $dimensions);
 	});
 
 	$('.swatch').on('click', function(e) {
@@ -123,6 +162,18 @@ $(document).ready(function() {
 			$(this).on('mouseup', function(e) {$(this).unbind('mousemove')});
 		});
 	});
+
+	function updateDimensions(x, y, el) {
+		console.log(x, y);
+		el.html(x + ' x ' + y);
+	}
+
+	// function resizeGrid(x, y, grid, render) {
+	// 	grid.clear();
+	// 	grid.width = x;
+	// 	grid.height = y;
+	// 	render ? grid.init(render) : grid.init();
+	// }
 
 	function updatePreview() {
 		$.extend(pGrid.tiles, oGrid.tiles);

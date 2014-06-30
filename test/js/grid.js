@@ -10,7 +10,7 @@ var MyGrid = ( function(window) {
 		this.tiles  = {};
 	}
 
-	Grid.prototype.init = function(render) {
+	Grid.prototype.init = function() {
 		for (var r = 0; r < this.height; r++) {
 			this.tiles[r] = {};
 			for (var c = 0; c < this.width; c++) {
