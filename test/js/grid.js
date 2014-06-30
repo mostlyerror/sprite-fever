@@ -1,4 +1,4 @@
-var MyGrid = ( function(window) {
+var MyGrid = ( function() {
 
 	// Grid
 	function Grid(el, width, height, scale) {
@@ -78,5 +78,5 @@ var MyGrid = ( function(window) {
 		grid: Grid
 	}
 
-})( window );
+})( );
 
