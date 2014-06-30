@@ -9,42 +9,43 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/test.css">
   <script src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
 </head>
 
 <body>
-
-<div class="container">
   <nav class="top-bar" data-topbar>
-
 	  <ul class="title-area">
-	    <li class="name"><h1><a href="#">Sprite Fever</a></h1></li>
+	    <li class="name"><h1><a href="#home">Sprite Fever</a></h1></li>
 	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	  </ul>
 
 	  <section class="top-bar-section">
-		    <ul class="right">
-		      <li class="has-dropdown">
-		        <a href="#">Menu</a>
-		        <ul class="dropdown">
-		          <li><a href="test.html">Home</a></li>
-		          <li><a href="about.html">About</a></li>
-		        </ul>
-		      </li>
-		    </ul>
-	    </section>
+	    <ul class="right">
+	      <li class="has-dropdown">
+	        <a href="#">Menu</a>
+	        <ul class="dropdown">
+	          <li><a href="#">Home</a></li>
+	          <li><a href="#">About</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+    </section>
   </nav>
 		
   <div id="main-container"></div>
-</div>
 
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/underscore.js"></script>
 	<script type="text/javascript" src="js/backbone.js"></script>
-
-	<script type="text/javascript" src="app.js"></script>
-	<script type="text/javascript" src="views/master.js"></script>
+	<script type="text/javascript" src="views/homeView.js"></script>
+	<script type="text/javascript" src="views/editPixel.js"></script>
+	<script type="text/javascript" src="views/editMoves.js"></script>
+	<script type="text/javascript" src="views/danceView.js"></script>
 	<script type="text/javascript" src="router.js"></script>
+
+	<script type="text/javascript" src="js/grid.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
 
 </html>
