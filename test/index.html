@@ -1,13 +1,18 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html class="no-js" lang="en" >
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sprite Fever</title>
+  <title>Canvas</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/test.css">
+  <script src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
 </head>
+
 <body>
   <div class="contain-to-grid">
   <nav class="top-bar" data-topbar>
@@ -39,5 +44,25 @@
   <footer><audio controls class="home" src="../test/sound/load.m4a" type="audio/mp4" autoplay="true" loop="true">
     <p>Your browser does not support HTMl5 audio. Lame!</p>
   </audio></footer>
+  <div id="main-container"></div>
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/underscore.js"></script>
+	<script type="text/javascript" src="js/backbone.js"></script>
+	<script type="text/javascript" src="views/homeView.js"></script>
+	<script type="text/javascript" src="views/editPixel.js"></script>
+	<script type="text/javascript" src="views/editMoves.js"></script>
+	<script type="text/javascript" src="views/danceView.js"></script>
+	<script type="text/javascript" src="router.js"></script>
+
+	<script type="text/javascript" src="js/grid.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
+
 </html>
+
+
+
+
+
+
