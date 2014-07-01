@@ -24,9 +24,20 @@ $('#shake').on('click', function(){
       });
 
 
-$('').on('click', function(){
-    $('.dancer').addClass('animated bounce');
+$('#bounceInRight').on('click', function(){
+    $('.dancer').addClass('animated bounceInRight');
       $('.dancer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $('.dancer').removeClass('animated bounce');
+        $('.dancer').removeClass('animated bounceInRight');
           });
       });
+
+$('#bounceInLeft').on('click', function(){
+    $('.dancer').addClass('animated bounceInLeft');
+      $('.dancer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $('.dancer').removeClass('animated bounceInLeft');
+          });
+      });
+
+
+
+
