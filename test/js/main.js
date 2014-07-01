@@ -1,5 +1,5 @@
 
-// Constants(for now)
+
 const TILE_SIZE = 30;
 const GRID_X = 16;
 const GRID_Y = 20;
@@ -80,21 +80,12 @@ $(document).ready(function() {
 	var $preview = $(preview);
 	var $name    = $('#name-input');
 
-
-	$('#button-clear').on('click', function(e) {
-
 	// button listeners
-
 	$('#button-clear').on('click', function(e) {
 
 		oGrid.clear();
 		pGrid.clear();
 	});
-
-	$('#button-save').on('click', function(e) {
-		if (oGrid.save($name.val(), spriteRef)) {
-			$name.val('');
-		}
 
 	$('#button-save').on('click', function(e) {
 		if (oGrid.save($name.val(), spriteRef)) $name.val('');
@@ -216,3 +207,5 @@ $(document).ready(function() {
 		}
 	}
 });
+
+

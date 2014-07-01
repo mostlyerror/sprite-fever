@@ -1,8 +1,5 @@
 /*style.css*/
 
-body {
-	background-color: #444;
-}
 .container {
 	padding: 30px;
 	margin: 0 auto;
@@ -12,7 +9,6 @@ body {
 	position: relative;
 	clear: both;
 }
-
 /*Left Panel*/
 
 #color-picker {
