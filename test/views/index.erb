@@ -1,0 +1,67 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/foundation.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/test.css">
+  <script src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
+</head>
+
+<body>
+  <div class="contain-to-grid">
+  <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name"><h1><a href="editor">Sprite Fever</a></h1></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </section>
+    </nav>
+  </div>
+  <div class="large-12 columns">
+    <div class="title-wrapper">
+      <img class="title" src="images/Sprite-Fever.png">
+    </div>
+  </div>
+  <div class="row">
+  <div class="large-3 medium-3 small-3 columns"></div>
+  <div class="large-6 medium-6 small-6 columns large-centered medium-centered small-centered">
+    <a id="editor" href="/editor"><img src="/images/New-Sprite.png" alt="editor"></a></br>
+    <a id="dance" href="/moves"><img src="/images/just-dance.png" alt="dance"></a></br>
+  </div>
+  <div class="large-3 mediums-3 small-3 columns"></div>
+</div>
+
+  <footer><audio controls class="home" src="/sound/load.m4a" type="audio/mp4" autoplay="true" loop="true">
+    <p>Your browser does not support HTMl5 audio. Lame!</p>
+  </audio></footer>
+  <div id="main-container"></div>
+
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/underscore.js"></script>
+	<script type="text/javascript" src="/js/backbone.js"></script>
+	<script type="text/javascript" src="/views/homeView.js"></script>
+	<script type="text/javascript" src="/views/editPixel.js"></script>
+	<script type="text/javascript" src="/views/editMoves.js"></script>
+	<script type="text/javascript" src="/views/danceView.js"></script>
+	<script type="text/javascript" src="/router.js"></script>
+	<script type="text/javascript" src="/js/grid.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
