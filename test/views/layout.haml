@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title Sprite Fever
+    %link(rel="stylesheet" type="text/css" href="/css/normalize.css")
+    %link(rel="stylesheet" type="text/css" href="/css/foundation.css")
+    %link(rel="stylesheet" type="text/css" href="/css/style.css")
+    %link(rel="stylesheet" type="text/css" href="/css/test.css")
+  %body
+    = yield_content :nav
+    = yield
+    %footer
+      %audio.home{ :controls => 'controls' }
+        %source{ :src => '/sound/load.m4a' }
+    / = yield :scripts

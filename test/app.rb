@@ -1,12 +1,18 @@
 require 'sinatra/base'
+require 'rubygems'
+require 'haml'
+require "sinatra/content_for"
+
 
 class SpriteApp < Sinatra::Base
+	helpers Sinatra::ContentFor
 	set :public_folder, 'public'
 	set :logging, :true
 	# set :sessions, true
 
 	get '/' do
-		erb :index
+		# erb :index
+		haml :index
 	end
 
 	get '/editor' do 
