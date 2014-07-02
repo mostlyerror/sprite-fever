@@ -43,7 +43,8 @@ $(document).ready(function() {
 		pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
 	};
 	colorMap.crossOrigin = "anonymous"; // CORS bullshit
-	colorMap.src = "http://localhost:8000/images/map-saturation.png"; // CORS bullshit
+	// colorMap.src = "http://localhost:8000/images/map-saturation.png"; // CORS bullshit
+	colorMap.src = "/images/map-saturation.png"; // CORS bullshit
 	var colorPickerData = pickerCTX.getImageData(0, 0, picker.width, picker.height);
 
 	// Controls
@@ -82,27 +83,23 @@ $(document).ready(function() {
 
 	// button listeners
 	$('#button-clear').on('click', function(e) {
-
 		oGrid.clear();
 		pGrid.clear();
 	});
 
+	// $('#button-add-moves').on('click', function(e) {
+	// 	e.preventDefault();
+	// 	console.log('#button-add-moves');
+	// 	// mb this doesn't even need to be ajax..
+	// 	$.post("/editor", function(data) {
+	// 		// console.log('posted to /dance_moves');
+
+	// 	});
+	// });
+
 	$('#button-save').on('click', function(e) {
 		if (oGrid.save($name.val(), spriteRef)) $name.val('');
 	});
-
-	// $('#button-resize').on('click', function(e) {
-	// 	if (confirm('Erase grid  and change dimensions forrealz?')) {
-	// 		var x = $gridSliderX.val();
-	// 		var y = $gridSliderY.val();
-	// 		resizeGrid(x, y, oGrid);
-	// 		resizeGrid(x, y, pGrid);
-	// 		resizeGrid(x, y, bgGrid);
-	// 		bgGrid.draw();
-	// 	}
-	// });
-
-	// DOM listeners
 
 	$(".controls-sliders input").on('click', function(e) {
 		var x = $gridSliderX.val();

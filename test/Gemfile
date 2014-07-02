@@ -1,4 +1,7 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
+# gem 'sinatra/base'
 gem 'sinatra'
 gem 'rspec'
+gem 'rack'
+# gem 'rack/contrib'

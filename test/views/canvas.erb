@@ -53,7 +53,6 @@
         </div>
         <!-- <div class="row"> -->
           <div id="toolbar">
-            <button id="button-clear" class="button clear">clear</button>
           </div>
         <!-- </div> -->
       </div>
@@ -72,13 +71,17 @@
         <div class="row">
           <div class="preview-container">
             <canvas id="preview"></canvas>
-          </div>
+            </div>
         </div>
 
         <div class="row">
-          <div class="name-container">
-          <input id="name-input" type="text" placeholder="Name me...">
-          <button id="button-save" class="button save">Save</button>
+          <div class="buttons-container">
+          <!-- <input id="name-input" type="text" placeholder="Name me..."> -->
+          <!-- <button id="button-save" class="button save">Save</button> -->
+            <button id="button-clear" class="button clear">clear</button>
+            <form action="/editor" method="post">
+              <button id="button-add-moves" class="button add-moves">show me your moves!</button>
+            </form>
           </div>
         </div>
 
