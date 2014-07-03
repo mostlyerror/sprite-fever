@@ -10,7 +10,6 @@ const WHITE = 'rgba(255, 255, 255, 1)';
 const GRID_BG_COLORS = [LIGHT_GREY, WHITE];
 
 $(document).ready(function() {
-
 	// Editor Canvases
 	// var myDataRef    = new Firebase('flickering-fire-2267.firebaseIO.com');
 	// var spriteRef    = myDataRef.child('sprites');
@@ -75,14 +74,6 @@ $(document).ready(function() {
 	$('#button-clear').on('click', function(e) {
 		oGrid.clear();
 		pGrid.clear();
-	});
-
-	$('#button-add-moves').on('click', function(e) {
-		e.preventDefault();
-		console.log('#button-add-moves');
-		$.get("/moves", function(data) {
-			$("#content").html(data);
-		});
 	});
 
 	$('#button-save').on('click', function(e) {

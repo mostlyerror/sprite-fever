@@ -2,8 +2,14 @@ require 'sinatra/base'
 require 'rubygems'
 require 'haml'
 require "sinatra/content_for"
+require "sinatra/reloader"
 
 class SpriteApp < Sinatra::Base
+
+	configure :development do
+		register Sinatra::Reloader
+	end
+	
 	helpers Sinatra::ContentFor
 	set :public_folder, 'public'
 	set :logging, :true
@@ -14,16 +20,15 @@ class SpriteApp < Sinatra::Base
 	end
 
 	get '/editor' do 
-		haml :canvas
+		haml :canvas, layout: false
 	end
 
-	post '/editor' do
-		puts params.inspect
-		redirect '/moves'
-	end
+	# post '/editor' do
+	# 	redirect '/moves'
+	# end
 
 	get '/moves' do
-		haml :moves
+		haml :moves, layout: false
 	end
 
     run! if app_file == $0
