@@ -11,9 +11,6 @@ const GRID_BG_COLORS = [LIGHT_GREY, WHITE];
 
 $(document).ready(function() {
 	// Editor Canvases
-	// var myDataRef    = new Firebase('flickering-fire-2267.firebaseIO.com');
-	// var spriteRef    = myDataRef.child('sprites');
-
 	var overlay = document.getElementById("overlay");
 	var bg      = document.getElementById("bg");
 	var preview = document.getElementById("preview");
@@ -63,6 +60,7 @@ $(document).ready(function() {
 	oGrid.init();
 	pGrid.init();
 	bgGrid.draw();
+	window.oGrid = oGrid;
 
 	var $bg      = $(bg);
 	var $overlay = $(overlay);
@@ -76,9 +74,9 @@ $(document).ready(function() {
 		pGrid.clear();
 	});
 
-	$('#button-save').on('click', function(e) {
-		if (oGrid.save($name.val(), spriteRef)) $name.val('');
-	});
+	// $('#button-save').on('click', function(e) {
+	// 	if (oGrid.save($name.val(), spriteRef)) $name.val('');
+	// });
 
 	$(".controls-sliders input").on('click', function(e) {
 		var x = $gridSliderX.val();

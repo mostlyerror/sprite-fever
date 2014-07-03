@@ -7,6 +7,8 @@
     %link(rel="stylesheet" type="text/css" href="/css/style.css")
     %link(rel="stylesheet" type="text/css" href="/css/test.css")
     %link(rel="stylesheet" type="text/css" href="/css/animate.css")
+    %script(src='https://cdn.firebase.com/js/client/1.0.17/firebase.js')    
+    %script(src='/js/jquery.js')
   %body
     %div.contain-togrid
       %nav.top-bar
@@ -17,13 +19,14 @@
                 Sprite Fever
           %ul.right
             %li
-              %a(href="/about")
+              %a#link-about(href="/about")
             %li
-              %a(href="/contact")
+              %a#link-contact(href="/contact")
     #content
       = yield
     %footer
       %audio.home{preload: 'auto', controls: true, autoplay: true, loop: true, volume: 0.5}
         %source{ src: '/sound/load.m4a' }
-    %script(src='/js/jquery.js')
-    %script(src='/js/ui.js')
+    %script(src='/js/foundation.js')
+    %script(src='/js/foundation.dropdown.js')
+    %script(src='/js/main.js')

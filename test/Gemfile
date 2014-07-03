@@ -6,4 +6,5 @@ gem 'sinatra/contrib'
 
 gem 'rspec'
 gem 'rack'
-# gem 'rack/contrib'
+
+gem 'pry-byebug'
