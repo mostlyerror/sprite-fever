@@ -1,7 +1,7 @@
 - content_for :moves
 %div.dancer-container
 	%div.dancer
-		%img(src='images/mario.png')
+		%img#dancer(src=@img_data)
 %div.moves-container
 	%label Dance Moves
 	%a#shake(href='#')
@@ -19,3 +19,4 @@
 %div.controls
 	%button#button-save.button.button-save
 		Save
+%script(src='/js/moves.js')

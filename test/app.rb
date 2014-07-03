@@ -19,7 +19,7 @@ class SpriteApp < Sinatra::Base
 	helpers Sinatra::ContentFor
 	set :public_folder, 'public'
 	set :logging, :true
-	# set :sessions, true
+	enable :sessions
 
 	get '/' do
 		haml :index
@@ -30,15 +30,14 @@ class SpriteApp < Sinatra::Base
 	end
 
 	get '/moves' do
+		response = @@firebase.get('sprites', { id: session[:spriteId] })
+		@img_data = JSON.parse(response.response.body)[session[:spriteId]]['dataURL']
 		haml :moves, layout: false
 	end
 
-	post '/sprites/new' do
+	post '/sprites' do
 		response = @@firebase.push("sprites", { dataURL: params['imgData'] })
-
-		content_type :json
-		response.body.merge({imgData: params['imgData']}).to_json
-		# :imgData => response.response.request.options[:body]
+		session[:spriteId] = JSON.parse(response.response.body)['name']
 	end
 
 	get '/dance' do

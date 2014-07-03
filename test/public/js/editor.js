@@ -74,10 +74,6 @@ $(document).ready(function() {
 		pGrid.clear();
 	});
 
-	// $('#button-save').on('click', function(e) {
-	// 	if (oGrid.save($name.val(), spriteRef)) $name.val('');
-	// });
-
 	$(".controls-sliders input").on('click', function(e) {
 		var x = $gridSliderX.val();
 		var y = $gridSliderY.val();

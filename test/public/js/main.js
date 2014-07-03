@@ -1,30 +1,22 @@
 $(function() {
 	attachRoute('#link-editor', '/editor');
 	attachRoute('#link-just-dance', '/dance');
-	// attachRoute('#button-add-moves', '/moves');
 
-	$(document).on('click', '#button-add-moves', function(e) {
+	attachRoute('#button-add-moves', '/moves', function(e) {
 		var pixelData = oGrid.el.toDataURL();
 		$.ajax({
 			type: 'post',
-			url: '/sprites/new', 
+			url: '/sprites', 
 			data: { imgData : pixelData }
-		}).done(function(err, msg, data) {
-			console.log(err, msg, data);
+		}).done(function(response, data) {
 			changeView(e, '/moves');
 		});
 	});
 
-	// $(document).on('click', '#button-save', function(e) {
-	// 	var newSpriteRef = spriteRef.push({
-	// 		name: name,
-	// 		dataURL: 
-	// 	})
-	// });
-
-	function attachRoute(selector, route, data) {
+	// if callback provided, exec callback
+	function attachRoute(selector, route, callback) {
 		$(document).on('click', selector, function(e) {
-			changeView(e, route);
+			callback ? callback(e, route) : changeView(e, route);
 		});
 	}
 
