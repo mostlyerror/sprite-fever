@@ -6,10 +6,25 @@
     %link(rel="stylesheet" type="text/css" href="/css/foundation.css")
     %link(rel="stylesheet" type="text/css" href="/css/style.css")
     %link(rel="stylesheet" type="text/css" href="/css/test.css")
+    %link(rel="stylesheet" type="text/css" href="/css/animate.css")
   %body
-    = yield_content :nav
-    = yield
+    %div.contain-togrid
+      %nav.top-bar
+        %ul.title-area
+          %li.name
+            %h1
+              %a(href="/")
+                Sprite Fever
+
+          %ul.right
+            %li
+              %a(href="/about")
+            %li
+              %a(href="/contact")
+    #content
+      = yield
     %footer
-      %audio.home{ :controls => 'controls' }
-        %source{ :src => '/sound/load.m4a' }
-    / = yield :scripts
+      %audio.home{preload: 'auto', controls: true, autoplay: true, loop: true, volume: 0.5}
+        %source{ src: '/sound/load.m4a' }
+    %script(src='/js/jquery.js')
+    %script(src='/js/moves.js')

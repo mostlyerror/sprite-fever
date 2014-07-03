@@ -1,0 +1,40 @@
+%div.container
+  %div.row
+    %div.left.large-3
+      %div.row
+        %div
+          %span
+            Colors
+        %div#color-picker
+          %canvas#color-picker-canvas
+          %div#swatch-container
+            %div.swatch.swatch-0
+            %div.swatch.swatch-1
+            %div.swatch.swatch-2
+            %div.swatch.swatch-3
+            %div.swatch.swatch-4
+            %div.swatch.swatch-5
+            %div.swatch.swatch-6
+            %div.swatch.swatch-7
+            %div.swatch.swatch-8
+      %div#toolbar
+    %div.small-5.medium-5.large-5.columns
+      %div.grid-container
+        %canvas#overlay
+        %canvas#bg
+    %div#right.small-3.medium-3.large-3.columns.right
+      %div.row
+        %div.control
+          %span
+            Preview
+      %div.row
+        %div.preview-container
+          %canvas#preview
+      %div.row
+        %div.buttons-container
+        %form(action='editor' method='post')
+          %button#button-add-moves.button.add-moves
+            show me your moves
+%script(src='/js/jquery.js')
+%script(src='/js/grid.js')
+%script(src='/js/editor.js')

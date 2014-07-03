@@ -3,7 +3,6 @@ require 'rubygems'
 require 'haml'
 require "sinatra/content_for"
 
-
 class SpriteApp < Sinatra::Base
 	helpers Sinatra::ContentFor
 	set :public_folder, 'public'
@@ -11,26 +10,20 @@ class SpriteApp < Sinatra::Base
 	# set :sessions, true
 
 	get '/' do
-		# erb :index
 		haml :index
 	end
 
 	get '/editor' do 
-		erb :canvas
+		haml :canvas
 	end
 
-	# post '/editor', :provides => :json do
 	post '/editor' do
 		puts params.inspect
-		# @sprite = params['dataURL']
-		# erb :moves
 		redirect '/moves'
 	end
 
 	get '/moves' do
-		puts params.inspect
-		# puts @sprite
-		erb :moves
+		haml :moves
 	end
 
     run! if app_file == $0

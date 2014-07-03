@@ -37,7 +37,3 @@ $('#bounceInLeft').on('click', function(){
         $('.dancer').removeClass('animated bounceInLeft');
           });
       });
-
-
-
-
