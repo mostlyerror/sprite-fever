@@ -6,22 +6,22 @@ Front End
 =========
 
 + Pixel Editor
-    + persistence for saved sprites        
+    ~~+ persistence for saved sprites~~        
     + transition animations (panels)
-    + Fix swatches
+    ~~+ Fix swatches~~
     + Implement Color Palette
 
 + Dance Move Editor
-	+ some dance moves..?
+	~~+ some dance moves..?~~
 	+ apply to preview
 	+ save
 	+ transition panels
 
 + Front Page
-	+ title
-	+ bg
+	~~+ title~~
+	~~+ bg~~
 	+ menu
-		+ link -> editor
+		~~+ link -> editor~~
 		+ link -> dance partay
 		+ transition animations
 
@@ -32,13 +32,13 @@ Front End
 
 + About "Page" -> this can really be a panel that slides in like the menu
 
-+ "Nav"? (is necesssary? dunno) - really just need a way to display about page, and get back to home
+~~+ "Nav"? (is necesssary? dunno) - really just need a way to display about page, and get back to home~~
 
 Back End
 ========
 
-+ Set up Sinatra
-+ Set up DB
++ Set up Sinatra (75%)
+~~+ Set up DB~~
 
 ## In the distant future..
 
