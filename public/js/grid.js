@@ -32,20 +32,20 @@ var MyGrid = ( function() {
 		this.ctx.clearRect(0, 0, this.el.width, this.el.height);
 	}
 
-	Grid.prototype.save = function(name, ref) {
-		var newSpriteRef = ref.push({
-			name: name,
-			dataURL: this.el.toDataURL()
-		}, function(err) {
-			if (err) { 
-				alert('Data could not be saved: ' + err);
-				return true;
-			} else {
-				alert('Data saved successfully.');
-				return false;
-			}
-		});
-	}
+	// Grid.prototype.save = function(name, ref) {
+	// 	var newSpriteRef = ref.push({
+	// 		name: name,
+	// 		dataURL: this.el.toDataURL()
+	// 	}, function(err) {
+	// 		if (err) { 
+	// 			alert('Data could not be saved: ' + err);
+	// 			return true;
+	// 		} else {
+	// 			alert('Data saved successfully.');
+	// 			return false;
+	// 		}
+	// 	});
+	// }
 
 	// Tile
 	function Tile(x, y, color, ctx, scale) {
