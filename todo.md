@@ -7,7 +7,7 @@ Front End
 
 + Pixel Editor
     ~~+ persistence for saved sprites~~        
-    + transition animations (panels)
+    ~~+ transition animations (panels)~~
     ~~+ Fix swatches~~
     + Implement Color Palette
 
@@ -15,7 +15,7 @@ Front End
 	~~+ some dance moves..?~~
 	+ apply to preview
 	+ save
-	+ transition panels
+	~~+ transition panels~~
 
 + Front Page
 	~~+ title~~

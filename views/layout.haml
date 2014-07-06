@@ -11,19 +11,23 @@
     %script(src='/js/jquery.js')
   %body
     %div.contain-togrid
-      %nav.top-bar
+      %nav.top-bar{:data => {'top-bar' => true}} 
         %ul.title-area
           %li.name
             %h1
               %a(href="/")
-                Sprite Fever
-        %ul.right
-          %audio.home{preload: 'auto', controls: true, autoplay: true, loop: true, volume: 0.5}
-            %source{ src: '/sound/load.m4a' }
-          %li
-            %a#link-about(href="/about") about
-          %li
-            %a#link-contact(href="/contact") contact
+                %span Sprite Fever
+        %section.top-bar-section
+          %ul.left
+            %li
+              %a(href="")
+                %audio{preload: 'auto', controls: true, autoplay: true, loop: true, volume: 0.5}
+                  %source{ src: '/sound/load.m4a' }
+          %ul.right
+            %li
+              %a#link-about(href="/about") about
+            %li
+              %a#link-contact(href="/contact") contact
     %div#content
       = yield
     %footer
