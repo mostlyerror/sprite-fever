@@ -44,5 +44,13 @@ class SpriteApp < Sinatra::Base
 		haml :dance
 	end
 
+	get '/about' do
+	# 	haml :about, layout :false
+	end
+
+	get 'contact' do
+	# 	haml :contact, layout: false
+	end
+
     run! if app_file == $0
 end
