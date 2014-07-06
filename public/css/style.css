@@ -1,3 +1,13 @@
+/*transitions*/
+
+body { overflow-x: hidden; }
+
+.loaded-content-wrapper {
+	margin-left: 100%;
+	width: 100%;
+	position: absolute;
+}
+
 /*style.css*/
 
 .container {

@@ -22,7 +22,15 @@ $(function() {
 
 	function changeView(e, route) {
 		e.preventDefault();
-		$("#content").load(route);	
+		// $("#content").load(route);
+		$wrapper = $('<div>');
+		$wrapper.addClass('loaded-content-wrapper').appendTo('#content').load(route, function() {
+			// when completely loaded animate content left to reduceRight
+			// also slide prev content to left and remove after
+			console.log($(this).prev());
+			$(this).animate({marginLeft: 0}, 'slow').prev().animate({marginLeft: '-100%'}, 'slow', function() {
+				$(this).remove();
+			})
+		});
 	}
-	
 });

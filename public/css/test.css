@@ -126,3 +126,24 @@ color: #fff;
 .home{
   margin-top: 300px;
 }
+
+.keyboard-tip-outer {
+  color: #eee;
+  height: 30px;
+  width: 30px;
+  padding: 2px;
+  text-align: center;
+  border-radius: 15%;
+  border: 1px solid #eee;
+}
+
+.keyboard-tip-inner {
+  border-radius: 15%;
+  border: 1px solid #eee;
+  padding: 2px;
+}
+
+.keyboard-tip-inner span {
+  display: inline-block;
+  vertical-align: middle;
+}

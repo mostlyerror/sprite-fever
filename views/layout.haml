@@ -17,16 +17,16 @@
             %h1
               %a(href="/")
                 Sprite Fever
-          %ul.right
-            %li
-              %a#link-about(href="/about")
-            %li
-              %a#link-contact(href="/contact")
-    #content
+        %ul.right
+          %audio.home{preload: 'auto', controls: true, autoplay: true, loop: true, volume: 0.5}
+            %source{ src: '/sound/load.m4a' }
+          %li
+            %a#link-about(href="/about") about
+          %li
+            %a#link-contact(href="/contact") contact
+    %div#content
       = yield
     %footer
-      %audio.home{preload: 'auto', controls: true, autoplay: true, loop: true, volume: 0.5}
-        %source{ src: '/sound/load.m4a' }
     %script(src='/js/foundation.js')
     %script(src='/js/foundation.dropdown.js')
     %script(src='/js/main.js')
