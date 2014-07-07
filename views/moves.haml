@@ -1,25 +1,50 @@
 - content_for :moves
-%div.keyboard-tip-outer
-	%div.keyboard-tip-inner
-		%span 1
-%div.dancer-container
-	%div.dancer
-		%img#dancer(src=@img_data)
-%div.moves-container
-	%label Dance Moves
-	%a#shake(href='#')
-		%img(src='/images/shake.png')
-	%a#wobble(href='#')
-		%img(src='/images/wobble.png')
-	%a#swing(href='#')
-		%img(src='/images/swing.png')
-	%a#bounce(href='#')
-		%img(src='/images/bounce.png')
-	%a#bounceInLeft(href='#')
-		%img(src='/images/SlideLeft.png')
-	%a#bounceInRight(href='#')
-		%img(src='/images/SlideRight.png')
-%div.controls
-	%button#button-save.button.button-save
-		Save
-%script(src='/js/moves.js')
+%div.overlay-container
+	%div.instructions-container
+		%div.row
+			%div.instructions 
+			| Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem omnis, quidem deserunt!
+			%div.tooltips
+				%ul
+					%li.tooltip
+						%div.keyboard-tip-outer
+							%div.keyboard-tip-inner
+								%span 1
+						%span shake
+					%li.tooltip
+						%div.keyboard-tip-outer
+							%div.keyboard-tip-inner
+								%span 2
+						%span wobble
+					%li.tooltip
+						%div.keyboard-tip-outer
+							%div.keyboard-tip-inner
+								%span 3
+						%span swing
+					%li.tooltip
+						%div.keyboard-tip-outer
+							%div.keyboard-tip-inner
+								%span 4
+						%span bounce
+%div.moves-editor-container
+	%div.dancer-container
+		%div.dancer
+			%img#dancer(src=@img_data)
+	%div.moves-container
+		%label Dance Moves
+		%a#shake(href='#')
+			%img(src='/images/shake.png')
+		%a#wobble(href='#')
+			%img(src='/images/wobble.png')
+		%a#swing(href='#')
+			%img(src='/images/swing.png')
+		%a#bounce(href='#')
+			%img(src='/images/bounce.png')
+		%a#bounceInLeft(href='#')
+			%img(src='/images/SlideLeft.png')
+		%a#bounceInRight(href='#')
+			%img(src='/images/SlideRight.png')
+	%div.controls
+		%button#button-save.button.button-save
+			Save
+	%script(src='/js/moves.js')

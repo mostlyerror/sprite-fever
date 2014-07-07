@@ -16,10 +16,6 @@ body{
   position: relative;
   clear: both;
 }
-/*.title{
- display: block;
-  margin: auto;
-}*/
 
 div{
     border: 0;
@@ -50,13 +46,17 @@ div{
   position: relative;
 
 }
+.title-wrapper {
+  width: 1000px;
+  margin: 0 auto;
+}
 
 .title{
   border: 0;
   width: 100%;
   height: auto;
   position: relative;
-  margin-top: 150px;
+  margin-top: 120px;
 
 }
 
@@ -78,15 +78,12 @@ html {
 
 .dancer-container{
 position: absolute;
-/*border: 2px red solid;*/
 height: 200px;
 width: 200px;
 top: 400px;
 margin: -100px 0 0 -150px;
 left: 50%;
 z-index: 15;
-
-
 }
 
 .dancer{
@@ -124,11 +121,34 @@ color: #fff;
 span{
 color: #fff;
 }
+
 .home{
   margin-top: 300px;
 }
 
+/*Moves Editor*/
+
+.moves-editor-container {
+  /*display: none;*/
+}
+
+/*Instructions Overlay*/
+
+/*overlay*/
+.overlay-container {}
+.instructions-container {}
+.instructions {}
+
+/*instructions*/
+
+/*keymap tooltips*/
+
+li.tooltip {
+  list-style-type: none;
+}
+
 .keyboard-tip-outer {
+  /*display: inline;*/
   color: #eee;
   height: 30px;
   width: 30px;
@@ -139,6 +159,7 @@ color: #fff;
 }
 
 .keyboard-tip-inner {
+  /*display: inline;*/
   border-radius: 15%;
   border: 1px solid #eee;
   padding: 2px;
