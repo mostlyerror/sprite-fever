@@ -4,33 +4,35 @@ const TILE_SIZE = 30;
 const GRID_X = 16;
 const GRID_Y = 20;
 const NUM_SWATCHES = 9;
-const SWATCH_LIGHTNESS_STEP = Math.ceil(255 / NUM_SWATCHES); //29 for 9 swatches;
+const SWATCH_LIGHTNESS_STEP = Math.ceil(255 / NUM_SWATCHES); //29 for 9 picker-swatches;
 const LIGHT_GREY  = 'rgba(200, 200, 200, 1)';
 const WHITE = 'rgba(255, 255, 255, 1)';
 const GRID_BG_COLORS = [LIGHT_GREY, WHITE];
 
 $(document).ready(function() {
-	// Editor Canvases
+
 	var overlay = document.getElementById("overlay");
 	var bg      = document.getElementById("bg");
 	var preview = document.getElementById("preview");
+	var palette = document.getElementById("canvas-color-palette");
 
 	bg.width    = overlay.width  = TILE_SIZE * GRID_X;
 	bg.height   = overlay.height = TILE_SIZE * GRID_Y;
 	preview.width  = TILE_SIZE * GRID_X;
 	preview.height = TILE_SIZE * GRID_Y;
+	palette.width = TILE_SIZE * 9;
+	palette.height = TILE_SIZE * 4;
 
-	// Color Picker & Swatches
 	var picker    = document.getElementById("color-picker-canvas");
 	var pickerCTX = picker.getContext("2d");
-	var swatches  = document.querySelectorAll('.swatch');
-	var swatchParent = document.querySelector('.swatch').parentNode;
+	var pickerSwatches  = document.querySelectorAll('.picker-swatch');
+	var pickerSwatchParent = document.querySelector('.picker-swatch').parentNode;
 
-
-	// adjust size of picker & swatches
+	// adjust size of picker & picker-swatches
 	picker.width  = $(picker.parentNode).width();
 	picker.height = 255;
-	$('.swatch').width($(swatchParent).width() / swatches.length);
+	$(pickerSwatches).width($(pickerSwatchParent).width() / pickerSwatches.length);
+	
 	var colorMap = new Image();
 	colorMap.onload = function() {
 		pickerCTX.drawImage(colorMap, 0, 0, picker.width, picker.height);
@@ -40,48 +42,47 @@ $(document).ready(function() {
 	colorMap.src = "/images/map-saturation.png"; // CORS bullshit
 	var colorPickerData = pickerCTX.getImageData(0, 0, picker.width, picker.height);
 
-	// Controls
-	// var gridSliderX  = document.getElementById("input-grid-slider-x");
-	// var gridSliderY  = document.getElementById("input-grid-slider-y");
-	var $gridSliderX = $('#gridSliderX');
-	var $gridSliderY = $('#gridSliderY');
-	var $dimensions  = $('.grid-dimensions');
-
 	// Color Variables
 	var selectedColor = 'rgba(0,0,0,1)';
 	var colorCounter = 0;
-
-	var Grid = MyGrid.grid;
-	var bgGrid = new Grid(bg, GRID_X, GRID_Y, 30);
-	var oGrid  = new Grid(overlay, GRID_X, GRID_Y, 30);
-	var pGrid  = new Grid(preview, GRID_X, GRID_Y, 13);
-
-	bgGrid.init();
-	oGrid.init();
-	pGrid.init();
-	bgGrid.draw();
-	window.oGrid = oGrid;
 
 	var $bg      = $(bg);
 	var $overlay = $(overlay);
 	var $picker  = $(picker);
 	var $preview = $(preview);
+	var $palette = $(palette);
 	var $name    = $('#name-input');
 
-	// button listeners
+	var Grid = MyGrid.grid;
+	var bgGrid = new Grid(bg, GRID_X, GRID_Y, 30);
+	var oGrid  = new Grid(overlay, GRID_X, GRID_Y, 30);
+	var pGrid  = new Grid(preview, GRID_X, GRID_Y, 13);
+	var cGrid  = new Grid(palette, 9, 4, 30);
+
+	bgGrid.init();
+	bgGrid.draw();
+
+	cGrid.init(['rgba(0, 0, 0, 0.5)']);
+	cGrid.draw();
+
+	oGrid.init();
+	pGrid.init();
+	window.oGrid = oGrid;
+	window.cGrid = cGrid;
+
+	// listeners
+
 	$('#button-clear').on('click', function(e) {
 		oGrid.clear();
 		pGrid.clear();
 	});
 
-	$(".controls-sliders input").on('click', function(e) {
-		var x = $gridSliderX.val();
-		var y = $gridSliderY.val();
-		updateDimensions(x, y, $dimensions);
+	$('.picker-swatch').on('click', function(e) {
+		selectedColor = $(this).css('background-color');
 	});
 
-	$('.swatch').on('click', function(e) {
-		selectedColor = $(this).css('background-color');
+	$palette.on('click', function(e) {
+		drawTile(getTile(e, cGrid), 'draw');
 	});
 
 	$picker.on('click', function(e) {
@@ -128,13 +129,6 @@ $(document).ready(function() {
 		console.log(x, y);
 		el.html(x + ' x ' + y);
 	}
-
-	// function resizeGrid(x, y, grid, render) {
-	// 	grid.clear();
-	// 	grid.width = x;
-	// 	grid.height = y;
-	// 	render ? grid.init(render) : grid.init();
-	// }
 
 	function updatePreview() {
 		$.extend(pGrid.tiles, oGrid.tiles);

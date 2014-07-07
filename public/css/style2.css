@@ -1,0 +1,8 @@
+body { color: black; }
+.left { width: 25%; float: left; }
+.center { width: 50% }
+.right { width: 25%; float: right;}
+
+.left-panel { background-color: blue;}
+.center-panel { background-color: yellow;}
+.right-panel { background-color: red;}

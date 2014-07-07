@@ -36,12 +36,21 @@ body{
 	background-image: url('map-saturation.png');
 	height: 255px;
 	width: 270px;
+  margin-bottom: 10px;
 }
 #swatch-container {
-	margin: 0;
-	font-size: 0; /*hack to remove space between swatches*/
+  margin: 0;
+  font-size: 0; /*hack to remove space between swatches*/
+  margin-bottom: 10px;
 }
-.swatch {
+#color-palette-container {
+  width: 258;
+  margin-bottom: 10px;
+}
+#canvas-color-palette {
+  width: 100%;
+}
+.swatch, .picker-swatch {
 	display: inline-block;
 	height: 30px;
 	width: 30px;
@@ -122,7 +131,7 @@ canvas {
   animation-delay: 2s;
 }
 
-#ajax-loader {
+/*#sam {
   display: none;
   height: 200px;
   width: 150px;
@@ -135,7 +144,8 @@ canvas {
   /*-vendor-animation-duration: 3s;*/
   /*-vendor-animation-iteration-count: infinite;*/
   /*-webkit-animation: dance-bob 2s infinite;*/
-}
+
+*/
 
 /*style.css*/
 

@@ -10,11 +10,13 @@ var MyGrid = ( function() {
 		this.tiles  = {};
 	}
 
-	Grid.prototype.init = function() {
+	Grid.prototype.init = function(colors) {
 		for (var r = 0; r < this.height; r++) {
 			this.tiles[r] = {};
 			for (var c = 0; c < this.width; c++) {
-				var t = new Tile(c, r, GRID_BG_COLORS[(c + r) % 2], this.ctx, this.scale);
+				var t = colors ?
+					new Tile(c, r, colors[(c + r) % 2], this.ctx, this.scale):
+					new Tile(c, r, GRID_BG_COLORS[(c + r) % 2], this.ctx, this.scale);
 				this.tiles[r][c] = t;
 			}
 		}
