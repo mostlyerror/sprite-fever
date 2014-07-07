@@ -3,11 +3,9 @@ $(function() {
 	attachRoute('#link-just-dance', '/dance');
 
 	attachRoute('#button-add-moves', '/moves', function(e) {
-		// dim page
-		// $("#page-dim").css('opacity', 0.6).fadeIn(300, function() {});
-		$("#page-dim").css('opacity', 0.6).fadeIn(300, function() {
-			$("ajax-loader").show();
-		});
+		
+		$("#page-dim").css('opacity', 0.6).fadeIn(300);
+		$("#ajax-loader").show().addClass('dance-bob');
 
 		var pixelData = oGrid.el.toDataURL();
 		$.ajax({

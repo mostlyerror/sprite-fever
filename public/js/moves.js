@@ -1,12 +1,11 @@
 $(function() {
-
   
   window.moves = [];
   $(document).on('mousemove', function(e) {
       moves.push({
           x: e.pageX,
           y: e.pageY
-      })
+      });
   });
 
   $(document).on('mousemove', function(e) {

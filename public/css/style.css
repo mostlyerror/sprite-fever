@@ -89,25 +89,55 @@ canvas {
 }
 
 #page-dim {
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    z-index: 999;
-    top: 0;
-    left: 0;
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 999;
+  top: 0;
+  left: 0;
+}
+
+@keyframes bounce {
+  0%   { top: 0px;  }
+  50%  { top: -10px;}
+  100% { top: 0px;  }
+}
+
+
+@-webkit-keyframes bounce {
+  0%   { top: 0px;  }
+  50%  { top: -10px;}
+  100% { top: 0px;  }
+}
+
+.bounce {
+  animation-name: bounce;
+  animation-duration: 4s;
+  animation-iteration-count: 10;
+  animation-direction: alternate;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
 }
 
 #ajax-loader {
-	top: calc(50% - 64)px;
-	left: calc(50% - 64)px;
-	background-image: url('/images/ajax_loader_red_128.gif');
+  display: none;
+  height: 200px;
+  width: 150px;
+  position: absolute  
+  top: calc(50% - 64px);
+  left: calc(50% - 64px);
+  background-image: url('../images/loading_man.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*-vendor-animation-duration: 3s;*/
+  /*-vendor-animation-iteration-count: infinite;*/
+  /*-webkit-animation: dance-bob 2s infinite;*/
 }
 
 /*style.css*/
-
-
 
 div{
     border: 0;
