@@ -10,20 +10,31 @@ Front End
     ~~+ transition animations (panels)~~
     ~~+ Fix swatches~~
     + Implement Color Palette
+    	~~+ paint~~
+    + Toolbar
+    	+ select (dropper)
+    	+ pencil
+    	+ eraser
+    	+ clear
 
 + Dance Move Editor
-	~~+ some dance moves..?~~
+	+ ~~+ some dance moves..?~~
 	+ apply to preview
-	+ save
 	~~+ transition panels~~
+	+ keymap for animations
+	+ helper text/ani
+	+ Layout
+		+ back button
+		+ save
+		+ change to 2-panel
 
-+ Front Page
+~~+ Front Page~~
 	~~+ title~~
 	~~+ bg~~
-	+ menu
+	~~+ menu~~
 		~~+ link -> editor~~
-		+ link -> dance partay
-		+ transition animations
+		~~+ link -> dance partay~~
+		~~+ transition animations~~
 
 + Dance Party
 	+ animations
@@ -38,7 +49,9 @@ Back End
 ========
 
 + Set up Sinatra (75%)
-~~+ Set up DB~~
+~~+ Set up ~~DB~~ Firebase~~
++ Router
+	+ URL handling - URL state doesn't change currently
 
 ## In the distant future..
 
