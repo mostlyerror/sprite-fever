@@ -94,8 +94,8 @@ $(document).ready(function() {
 		}
 		// fade callout in if it doesn't exist
 		if (!showing) {
-			$calloutText.fadeIn('slow');
-			$callout.fadeIn('slow');
+			$calloutText.stop().fadeIn('slow');
+			$callout.stop().fadeIn('slow');
 		}
 		showing = true;
 		// if currently counting down, decrement timer and recurse after 1 sec
@@ -103,8 +103,8 @@ $(document).ready(function() {
 			fadeTimer -= 0.5;
 			setTimeout(callout, 500);
 		} else {
-			$calloutText.fadeOut('fast');
-			$callout.fadeOut('fast');
+			$calloutText.stop().fadeOut('fast');
+			$callout.stop().fadeOut('fast');
 			showing = false;
 		}
 	}

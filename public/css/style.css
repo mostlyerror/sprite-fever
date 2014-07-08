@@ -345,13 +345,13 @@ li.tooltip {
 
 .callout:after {
   border-color: rgba(70, 95, 110, 0);
-  border-left-color: #465f6e;
+  border-left-color: rgba(70, 95, 110, 1);
   border-width: 12px;
   margin-top: -12px;
 }
 .callout:before {
   border-color: rgba(194, 225, 245, 0);
-  border-left-color: #c2e1f5;
+  border-left-color: rgba(194, 225, 245, 1);
   border-width: 15px;
   margin-top: -15px;
 }
