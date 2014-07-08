@@ -53,6 +53,12 @@ $(document).ready(function() {
 	var $palette = $(palette);
 	var $name    = $('#name-input');
 
+	var showing = false;
+	var fadeTimer;
+	var $callout = $('.callout');
+	var $calloutText = $('.callout-text');
+	var $helper  = $('.help-bob');
+
 	var Grid = MyGrid.grid;
 	var bgGrid = new Grid(bg, GRID_X, GRID_Y, 30);
 	var oGrid  = new Grid(overlay, GRID_X, GRID_Y, 30);
@@ -68,10 +74,66 @@ $(document).ready(function() {
 	oGrid.init();
 	pGrid.init();
 	window.oGrid = oGrid;
-	window.cGrid = cGrid;
+	// window.cGrid = cGrid;
+
+	// instruction callouts
+	$palette.on('mouseover', null, {str: 'Use the Palette to store colors you like.'}, callout);
+	$picker.on('mouseover', null, {str:  'Click on the Color Picker to select a color.'}, callout);
+	$overlay.on('mouseover', null, {str: 'Have at it, Pixel Picasso!'}, callout);
+	$preview.on('mouseover', null, {str: 'Get a sneak Preview of your sprite.'}, callout);
+	$helper.on('mouseover', null, {str: 'Hands to yourself!'}, callout);
+
+	function callout(e) {
+		// callbacks won't have event attached, so if event exists
+		// this is the initial call
+		// fadeTimer = e ? 4 : fadeTimer;
+		if (e) {
+			fadeTimer = 2;
+			$calloutText.html(e.data.str);
+			// bounce bob
+			$helper.animate({top: '-3px'}, 'fast').animate({top: '0px'}, 'fast');
+		}
+		// fade callout in if it doesn't exist
+		if (!showing) {
+			$calloutText.fadeIn('slow');
+			$callout.fadeIn('slow');
+		}
+		showing = true;
+		// if currently counting down, decrement timer and recurse after 1 sec
+		if (fadeTimer) {
+			fadeTimer -= 1;
+			setTimeout(callout, 1000);
+		} else {
+			$calloutText.fadeOut('fast');
+			$callout.fadeOut('fast');
+			showing = false;
+		}
+		console.log(callout, fadeTimer);
+	}
+
+	// function callout(el, str) {
+	// 	el.on('mouseover', function(e) {
+	// 		timer = 4;
+	// 		callout = el;
+	// 		if (!callout) {
+	// 			$callout.fadeIn('slow');
+	// 		}
+	// 		$helper.animate({ top: '-3px' }, 150);
+	// 		$helper.animate({ top: '0px' }, 150);
+	// 		$callout.html(str);
+	// 	});
+
+	// 	if (!timer) {
+	// 		$callout.fadeOut();
+	// 		callout = null;
+	// 	} else {
+	// 		timer -= 1;
+	// 		console.log(timer);
+	// 		setTimeout(callout, 1000, el, str);
+	// 	}
+	// };
 
 	// listeners
-
 	$('#button-clear').on('click', function(e) {
 		oGrid.clear();
 		pGrid.clear();
@@ -171,5 +233,3 @@ $(document).ready(function() {
 		}
 	}
 });
-
-
