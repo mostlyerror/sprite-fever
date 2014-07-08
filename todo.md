@@ -66,3 +66,4 @@ Back End
 + pixel editor: Rotate
 + pixel editor: Mirror Drawing
 + animation editor: sprite save: canvas resize to min/max pixel bounds (reduce png size)
++ animation editor: trim png whitespace to smallest box size

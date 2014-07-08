@@ -2,9 +2,9 @@
 %div.container
 	%div.row
 		%div.left.large-7.columns
-			%div.dancer-container
-				%div.dancer.animated
-					%img#dancer(src=@img_data)
+			%div.dancer-container.animated
+				%div.dancer
+					%img#dancer.animated(src=@img_data)
 		%div.right.large-5.columns
 			%div.moves-editor-container
 				%div.moves-animation-container
@@ -19,5 +19,9 @@
 						%img(src='/images/bounce.png')
 				%div.controls
 					%button#button-save.button.button-save
+						%span.fa.fa-save 
 						Save
+					%button#button-record.button.button-record
+						%span.fa.fa-video-camera 
+						Record
 %script(src='/js/moves.js')

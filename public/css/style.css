@@ -222,27 +222,24 @@ canvas {
 }
 
 .dancer-container{
-position: absolute;
+/*position: absolute;
 height: 200px;
 width: 200px;
 top: 400px;
 margin: -100px 0 0 -150px;
 left: 50%;
-z-index: 15;
+z-index: 15;*/
+  backface-visibility: visible;
+  perspective: 500px;
+  -webkit-perspective: 500px;
 }
 
 .dancer{
-position: relative;
+
+/*position: relative;
 width: 200px;
-height: 200px;
+height: 200px;*/
 }
-
-/*.moves-container{
-  float: right;
-  position: relative;
-
-  width: 400px;
-}*/
 
 .contact-header{
   color:white;
