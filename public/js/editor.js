@@ -122,28 +122,6 @@ $helper.on('mouseover', null, {str: 'Watch it! Hands to yourself!'}, callout);
 		}
 	}
 
-	// function callout(el, str) {
-	// 	el.on('mouseover', function(e) {
-	// 		timer = 4;
-	// 		callout = el;
-	// 		if (!callout) {
-	// 			$callout.fadeIn('slow');
-	// 		}
-	// 		$helper.animate({ top: '-3px' }, 150);
-	// 		$helper.animate({ top: '0px' }, 150);
-	// 		$callout.html(str);
-	// 	});
-
-	// 	if (!timer) {
-	// 		$callout.fadeOut();
-	// 		callout = null;
-	// 	} else {
-	// 		timer -= 1;
-	// 		console.log(timer);
-	// 		setTimeout(callout, 1000, el, str);
-	// 	}
-	// };
-
 	// listeners
 	$('#button-clear').on('click', function(e) {
 		oGrid.clear();
