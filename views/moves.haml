@@ -2,11 +2,12 @@
 %div.container
 	%div.row
 		%div.left.large-7.columns
+			%div.dancer-container
+				%div.dancer.animated
+					%img#dancer(src=@img_data)
+		%div.right.large-5.columns
 			%div.moves-editor-container
-				%div.dancer-container
-					%div.dancer
-						%img#dancer(src=@img_data)
-				%div.moves-container
+				%div.moves-animation-container
 					%label Dance Moves
 					%a#shake(href='#')
 						%img(src='/images/shake.png')
@@ -19,5 +20,4 @@
 				%div.controls
 					%button#button-save.button.button-save
 						Save
-				%script(src='/js/moves.js')
-		%div.right.large-5.columns
+%script(src='/js/moves.js')
