@@ -81,7 +81,7 @@ $(document).ready(function() {
 	$picker.on('mouseover', null, {str:  'Click on the Color Picker to select a color.'}, callout);
 	$overlay.on('mouseover', null, {str: 'Have at it, Pixel Picasso!'}, callout);
 	$preview.on('mouseover', null, {str: 'Get a sneak Preview of your sprite.'}, callout);
-	$helper.on('mouseover', null, {str: 'Hands to yourself!'}, callout);
+$helper.on('mouseover', null, {str: 'Watch it! Hands to yourself!'}, callout);
 
 	function callout(e) {
 		// callbacks won't have event attached, so if event exists

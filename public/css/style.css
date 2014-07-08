@@ -7,24 +7,114 @@ body{
   overflow-x: hidden;
 }
 
+.container {
+  padding: 30px;
+  margin: 0 auto;
+  width: 1140px;
+}
+
 .loaded-content-wrapper {
 	margin-left: 100%;
 	width: 100%;
 	position: absolute;
 }
 
-/*style.css*/
+/*Title Screen*/
 
-.container {
-	padding: 30px;
-	margin: 0 auto;
-	width: 1140px;
+.title-wrapper {
+  width: 1000px;
+  margin: 0 auto;
 }
+
+.title{
+  border: 0;
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin-top: 120px;
+
+}
+
+.filler{
+  height: 100px;
+  position: relative;
+}
+
+.row{
+  position: relative;
+}
+html {
+  background: url("../images/bg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+/*Pixel Editor*/
+
 .grid-container {
-	position: relative;
-	clear: both;
+  position: relative;
+  clear: both;
 }
-/*Left Panel*/
+
+.help-container {
+  width: 100%;
+  margin-left: 10px;
+  margin-bottom: 3px;
+  font-size: 0.75em;
+}
+.help-instructions {
+  float: left;
+  width: 75%;
+  height: 75px;
+}
+.help-bob {
+  position: relative;
+  background: url('../images/loading_man.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+  width: 25%;
+  margin-top: 10px;
+  margin-left: 75%;
+}
+.callout-text {
+  color: #fff;
+  line-height: 1.2rem;
+}
+
+.callout {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #c2e1f5;
+  border-radius: 10px;
+  padding: 12px;
+}
+.callout:after, .callout:before {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.callout:after {
+  border-color: rgba(70, 95, 110, 0);
+  border-left-color: rgba(70, 95, 110, 1);
+  border-width: 12px;
+  margin-top: -12px;
+}
+.callout:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-left-color: rgba(194, 225, 245, 1);
+  border-width: 15px;
+  margin-top: -15px;
+}
 
 #color-picker {
 	border: 1px solid #ccc;
@@ -62,7 +152,6 @@ body{
 canvas {
 	cursor: url('../images/cursor.cur'), auto;
 }
-
 
 #bg, #overlay {
 	position: absolute;
@@ -108,53 +197,6 @@ canvas {
   left: 0;
 }
 
-@keyframes bounce {
-  0%   { top: 0px;  }
-  50%  { top: -10px;}
-  100% { top: 0px;  }
-}
-
-
-@-webkit-keyframes bounce {
-  0%   { top: 0px;  }
-  50%  { top: -10px;}
-  100% { top: 0px;  }
-}
-
-.bounce {
-  animation-name: bounce;
-  animation-duration: 4s;
-  animation-iteration-count: 10;
-  animation-direction: alternate;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
-}
-
-/*#sam {
-  display: none;
-  height: 200px;
-  width: 150px;
-  position: absolute  
-  top: calc(50% - 64px);
-  left: calc(50% - 64px);
-  background-image: url('../images/loading_man.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  /*-vendor-animation-duration: 3s;*/
-  /*-vendor-animation-iteration-count: infinite;*/
-  /*-webkit-animation: dance-bob 2s infinite;*/
-
-*/
-
-/*style.css*/
-
-div{
-    border: 0;
-     width: 100%;
-     height: auto;
-}
-
 .menu{
   display: block;
     position: relative;
@@ -177,35 +219,6 @@ div{
   height: auto;
   position: relative;
 
-}
-.title-wrapper {
-  width: 1000px;
-  margin: 0 auto;
-}
-
-.title{
-  border: 0;
-  width: 100%;
-  height: auto;
-  position: relative;
-  margin-top: 120px;
-
-}
-
-.filler{
-  height: 100px;
-  position: relative;
-}
-
-.row{
-  position: relative;
-}
-html {
-  background: url("../images/bg.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
 .dancer-container{
@@ -276,7 +289,7 @@ color: #fff;
 /*keymap tooltips*/
 
 li.tooltip {
-  list-style-type: none;
+  /*list-style-type: none;*/
 }
 
 .keyboard-tip-outer {
@@ -297,61 +310,4 @@ li.tooltip {
 .keyboard-tip-inner span {
   display: inline-block;
   vertical-align: middle;
-}
-.help-container {
-  width: 100%;
-  /*padding-left: 10px;*/
-  margin-left: 10px;
-  margin-bottom: 3px;
-  font-size: 0.75em;
-}
-.help-instructions {
-  float: left;
-  width: 75%;
-  height: 75px;
-}
-.help-bob {
-  position: relative;
-  background: url('../images/loading_man.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100px;
-  width: 25%;
-  margin-top: 10px;
-  margin-left: 75%;
-}
-.callout-text {
-  color: #fff;
-  line-height: 1.2rem;
-}
-
-.callout {
-  position: relative;
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid #c2e1f5;
-  border-radius: 10px;
-  padding: 12px;
-}
-.callout:after, .callout:before {
-  left: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.callout:after {
-  border-color: rgba(70, 95, 110, 0);
-  border-left-color: rgba(70, 95, 110, 1);
-  border-width: 12px;
-  margin-top: -12px;
-}
-.callout:before {
-  border-color: rgba(194, 225, 245, 0);
-  border-left-color: rgba(194, 225, 245, 1);
-  border-width: 15px;
-  margin-top: -15px;
 }
