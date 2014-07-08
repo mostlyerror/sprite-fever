@@ -2,11 +2,8 @@ $(function() {
 	attachRoute('#link-editor', '/editor');
 	attachRoute('#link-just-dance', '/dance');
 
-	attachRoute('#button-add-moves', '/moves', function(e) {
-		
+	attachRoute('#button-add-moves', '/moves', function(e) {	
 		$("#page-dim").css('opacity', 0.6).fadeIn(300);
-		$("#ajax-loader").show().addClass('dance-bob');
-
 		var pixelData = oGrid.el.toDataURL();
 		$.ajax({
 			type: 'post',
@@ -20,11 +17,13 @@ $(function() {
 	// if callback provided, exec callback
 	function attachRoute(selector, route, callback) {
 		$(document).on('click', selector, function(e) {
+			console.log(e.target);
 			callback ? callback(e, route) : changeView(e, route);
 		});
 	}
 
 	function changeView(e, route) {
+		console.log('changeView called');
 		e.preventDefault();
 		// $("#content").load(route);
 		$wrapper = $('<div>');
