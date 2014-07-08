@@ -88,10 +88,9 @@ $(document).ready(function() {
 		// this is the initial call
 		// fadeTimer = e ? 4 : fadeTimer;
 		if (e) {
-			fadeTimer = 2;
+			fadeTimer = 2.5;
 			$calloutText.html(e.data.str);
-			// bounce bob
-			$helper.animate({top: '-3px'}, 'fast').animate({top: '0px'}, 'fast');
+			bounceBob();
 		}
 		// fade callout in if it doesn't exist
 		if (!showing) {
@@ -101,14 +100,26 @@ $(document).ready(function() {
 		showing = true;
 		// if currently counting down, decrement timer and recurse after 1 sec
 		if (fadeTimer) {
-			fadeTimer -= 1;
-			setTimeout(callout, 1000);
+			fadeTimer -= 0.5;
+			setTimeout(callout, 500);
 		} else {
 			$calloutText.fadeOut('fast');
 			$callout.fadeOut('fast');
 			showing = false;
 		}
-		console.log(callout, fadeTimer);
+	}
+
+	function bounceBob() {
+		if (Math.random() > 0.5) {
+			$helper
+			.animate({top: '-3px', left: '-2px'}, 100)
+			.animate({top: '0px', left: '0px'}, 50)
+			
+		} else {
+			$helper
+			.animate({top: '-3px', left: '2px'}, 100)
+			.animate({top: '0px', left: '0px'}, 50);
+		}
 	}
 
 	// function callout(el, str) {

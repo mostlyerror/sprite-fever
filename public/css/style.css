@@ -322,6 +322,7 @@ li.tooltip {
 }
 .callout-text {
   color: #fff;
+  line-height: 1.2rem;
 }
 
 .callout {
