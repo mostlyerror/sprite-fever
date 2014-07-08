@@ -22,8 +22,7 @@ class SpriteApp < Sinatra::Base
 	enable :sessions
 
 	get '/' do
-		'asdf'
-		# haml :index
+		haml :index
 	end
 
 	get '/editor' do 
