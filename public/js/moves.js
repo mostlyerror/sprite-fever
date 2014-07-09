@@ -13,13 +13,53 @@ $(function() {
   // starts recording mouse activity after 3 seconds
   $('#button-record').on('click', function(e) {
     countInterval = setInterval(countdown, 1000);
-    // var capture = countdown(captureMouseInput, 3);
   });
+
+  function chronoOrderCaptures(mouse, keyboard) {
+
+    // what a hack...
+    // if (keyboard.length == 0) { keyboard.push({key: null, t: 999999999999999 }) }
+
+    var greater = (mouse.length > keyboard.length) ? mouse.length : keyboard.length;
+
+    var chrono = {};
+    var j = 0;
+    var k = 0;
+
+    for (var i = 0; i < greater; i++) {
+      if (keyboard[k] == undefined) {
+        chrono[mouse[j].t] = {
+          type: 'mouse',
+          x: mouse[j].x,
+          y: mouse[j].y
+        };
+        j++; 
+      } else {
+        if (mouse[j].t < keyboard[k].t) {
+          chrono[mouse[j].t] = {
+            type: 'mouse',
+            x: mouse[j].x,
+            y: mouse[j].y
+          }; 
+          j++;
+        } else {
+          chrono[keyboard[k].t] = {
+            type : 'key',
+            key: keyboard[k].key
+          };
+          k++;
+        }
+      }
+    }
+    return chrono;
+  }
 
   // execute function fn after X seconds
   function countdown() {
     --count;
+    console.log(count);
     if (count == 0) {
+      console.log('recording')
       captureInput();
       clearInterval(countInterval);
       count = 3;
@@ -38,8 +78,6 @@ $(function() {
         y: e.pageY,
         t: time
       });
-
-
     });
 
     $(document).on('keyup.capture', function(e) {
@@ -51,14 +89,15 @@ $(function() {
     });
 
     setTimeout(function() {
+      console.log('finished capturing');
       $(document).off('.capture');
-      console.log(mouseCapture);
-      console.log(keyCapture);
-    }, 10000);
+      console.log(chronoOrderCaptures(mouseCapture, keyCapture));
+      console.log(mouseCapture.length);
+      console.log(keyCapture.length);
+    }, 3000);
 
   }
 
-  $(document).on('mousemove', followMouse);
 
   function followMouse(e) {
       var width = $(window).width();
@@ -75,8 +114,6 @@ $(function() {
       $("#box").css('margin-top', y + 'px');
   }
 
-  $(window).on('resize', resize);
-  $(document).ready(resize);
 
   $(document).on('keyup', function(e) {
     console.log(e.which);
@@ -99,4 +136,8 @@ $(function() {
   function triggerAnimation(el, klassName) {
     el.stop(true, false).addClass(klassName).one('webkitAnimationEnd', function() { el.removeClass(klassName) });
   }  
+
+  $(window).on('resize', resize);
+  $(document).ready(resize);
+  $(document).on('mousemove', followMouse);
 });
