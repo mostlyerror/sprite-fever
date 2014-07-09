@@ -75,10 +75,11 @@ html {
   background: url('../images/loading_man.png');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100px;
+  background-size: contain;
+  height: 75px;
   width: 25%;
   margin-top: 10px;
-  margin-left: 75%;
+  margin-left: 80%;
 }
 .callout-text {
   color: #fff;

@@ -5,23 +5,22 @@ $(function() {
   var $dancerContainer = $(dancerContainer);
   var recording = false;
 
-  window.mouseCapture = [];
-  window.keyCapture = [];
+  // window.mouseCapture = [];
+  // window.keyCapture = [];
+  var captured = [];
   var count = 3;
   var countInterval;
 
-  // starts recording mouse activity after 3 seconds
-  $('#button-record').on('click', function(e) {
-    countInterval = setInterval(countdown, 1000);
-  });
+  function replayDance(captured) {
+    var elapsed = 0;
+    var start = new Date().getTime();    
+    // loop for X seconds
+    // calculate elapsed time
+    // if captured[elapsed] trigger something
+  }
 
   function chronoOrderCaptures(mouse, keyboard) {
-
-    // what a hack...
-    // if (keyboard.length == 0) { keyboard.push({key: null, t: 999999999999999 }) }
-
     var greater = (mouse.length > keyboard.length) ? mouse.length : keyboard.length;
-
     var chrono = {};
     var j = 0;
     var k = 0;
@@ -67,9 +66,8 @@ $(function() {
   }
 
   function captureInput() {
-
-    mouseCapture = [];
-    keyCapture = [];
+    var mouseCapture = [];
+    var keyCapture = [];
 
     $(document).on('mousemove.capture', function(e) {
       var time = new Date().getTime();
@@ -91,13 +89,10 @@ $(function() {
     setTimeout(function() {
       console.log('finished capturing');
       $(document).off('.capture');
-      console.log(chronoOrderCaptures(mouseCapture, keyCapture));
-      console.log(mouseCapture.length);
-      console.log(keyCapture.length);
+      captured = chronoOrderCaptures(mouseCapture, keyCapture));
+      console.log(captured);
     }, 3000);
-
   }
-
 
   function followMouse(e) {
       var width = $(window).width();
@@ -114,6 +109,9 @@ $(function() {
       $("#box").css('margin-top', y + 'px');
   }
 
+  function triggerAnimation(el, klassName) {
+    el.stop(true, false).addClass(klassName).one('webkitAnimationEnd', function() { el.removeClass(klassName) });
+  }  
 
   $(document).on('keyup', function(e) {
     console.log(e.which);
@@ -132,11 +130,17 @@ $(function() {
         break;
     }
   });
-  
-  function triggerAnimation(el, klassName) {
-    el.stop(true, false).addClass(klassName).one('webkitAnimationEnd', function() { el.removeClass(klassName) });
-  }  
 
+  // starts recording input activity after 3 seconds
+  $('#button-record').on('click', function(e) {
+    countInterval = setInterval(countdown, 1000);
+  });
+
+  $('#button-replay').on('click', function(e) {
+    console.log('#button-replay click');
+    replayDance(captured);
+  })
+  
   $(window).on('resize', resize);
   $(document).ready(resize);
   $(document).on('mousemove', followMouse);
