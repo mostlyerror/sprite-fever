@@ -5,39 +5,57 @@ $(function() {
   var $dancerContainer = $(dancerContainer);
   var recording = false;
 
-  window.moves = [];
-  window.moveCapture = [];
+  window.mouseCapture = [];
+  window.keyCapture = [];
+  var count = 3;
+  var countInterval;
 
   // starts recording mouse activity after 3 seconds
   $('#button-record').on('click', function(e) {
-    console.log('record clicked');
-    var capture = countdown(captureMouseInput, 3);
-    console.log(capture);
+    countInterval = setInterval(countdown, 1000);
+    // var capture = countdown(captureMouseInput, 3);
   });
 
   // execute function fn after X seconds
-  function countdown(fn, seconds) {
-    var count = seconds;
-    var counter = setInterval(countdown, 1000);
-    count -= 1;
-    if (count <= 0)
-    {
-       clearInterval(counter);
-       return fn();
+  function countdown() {
+    --count;
+    if (count == 0) {
+      captureInput();
+      clearInterval(countInterval);
+      count = 3;
     }
   }
 
-  function captureMouseInput() {
-    moves = [];
-    recording = true;
+  function captureInput() {
+
+    mouseCapture = [];
+    keyCapture = [];
+
     $(document).on('mousemove.capture', function(e) {
-      moves.push({x: e.pageX, y: e.pageY});
+      var time = new Date().getTime();
+      mouseCapture.push({
+        x: e.pageX, 
+        y: e.pageY,
+        t: time
+      });
+
+
     });
+
+    $(document).on('keyup.capture', function(e) {
+      var time = new Date().getTime();
+      keyCapture.push({
+        key: e.which,
+        t: time
+      })
+    });
+
     setTimeout(function() {
-      moveCapture = moves;
       $(document).off('.capture');
+      console.log(mouseCapture);
+      console.log(keyCapture);
     }, 10000);
-    return moveCapture;
+
   }
 
   $(document).on('mousemove', followMouse);
@@ -60,7 +78,7 @@ $(function() {
   $(window).on('resize', resize);
   $(document).ready(resize);
 
-  $(document).on('keypress', function(e) {
+  $(document).on('keyup', function(e) {
     console.log(e.which);
     switch (e.which) {
       case 49:

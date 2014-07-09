@@ -13,22 +13,25 @@ Front End
     ~~+ Fix swatches~~
     + Implement Color Palette
     	~~+ paint~~
+    	+ dropper?
     + Toolbar
     	+ select (dropper)
     	+ pencil
     	+ eraser
-    	+ clear
+    	~~+ clear~~
 
 + Dance Move Editor
-	+ ~~+ some dance moves..?~~
-	+ apply to preview
+	~~+ some dance moves..?~~
+	~~+ apply to preview~~
 	~~+ transition panels~~
-	+ keymap for animations
+	~~+ keymap for animations~~
 	+ helper text/ani
 	+ Layout
 		+ back button
 		+ save
-		+ change to 2-panel
+		~~+ change to 2-panel~~
+	+ animation capture
+	+ animation playback
 
 ~~+ Front Page~~
 	~~+ title~~
@@ -39,6 +42,7 @@ Front End
 		~~+ transition animations~~
 
 + Dance Party
+	+ animation playback
 	+ animations
 	+ hover effects
 	+ musics
@@ -54,6 +58,9 @@ Back End
 ~~+ Set up ~~DB~~ Firebase~~
 + Router
 	+ URL handling - URL state doesn't change currently
++ Testing
+	+ ??
+
 
 ## In the distant future..
 
