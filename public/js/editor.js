@@ -58,23 +58,13 @@ $(document).ready(function() {
 	var $callout = $('.callout');
 	var $calloutText = $('.callout-text');
 	var $helper  = $('.help-bob');
+	var $jiggy = $("#button-add-moves");
 
 	var Grid = MyGrid.grid;
 	var bgGrid = new Grid(bg, GRID_X, GRID_Y, 30);
 	var oGrid  = new Grid(overlay, GRID_X, GRID_Y, 30);
 	var pGrid  = new Grid(preview, GRID_X, GRID_Y, 13);
 	var cGrid  = new Grid(palette, 9, 4, 30);
-
-	bgGrid.init();
-	bgGrid.draw();
-
-	cGrid.init(['rgba(0, 0, 0, 0.5)']);
-	cGrid.draw();
-
-	oGrid.init();
-	pGrid.init();
-	window.oGrid = oGrid;
-	// window.cGrid = cGrid;
 
 	// instruction callouts
 	$palette.on('mouseover', null, {str: 'Use the Palette to store colors you like.'}, callout);
@@ -83,31 +73,11 @@ $(document).ready(function() {
 	$preview.on('mouseover', null, {str: 'Get a sneak Preview of your sprite.'}, callout);
 	$helper.on('mouseover', null, {str: 'Watch it! Hands to yourself!'}, callout);
 	$clear.on('mouseover', null, {str: 'Wipe the slate clean.'}, callout);
+	$jiggy.on('mouseover', null, {str: 'Awww yeaa boyee!'}, callout);
 
 	function callout(e) {
-		// callbacks won't have event attached, so if event exists
-		// this is the initial call
-		// fadeTimer = e ? 4 : fadeTimer;
-		if (e) {
-			fadeTimer = 2.5;
-			$calloutText.html(e.data.str);
-			bounceBob();
-		}
-		// fade callout in if it doesn't exist
-		if (!showing) {
-			$calloutText.stop().fadeIn('slow');
-			$callout.stop().fadeIn('slow');
-		}
-		showing = true;
-		// if currently counting down, decrement timer and recurse after 1 sec
-		if (fadeTimer) {
-			fadeTimer -= 0.5;
-			setTimeout(callout, 500);
-		} else {
-			$calloutText.stop().fadeOut('fast');
-			$callout.stop().fadeOut('fast');
-			showing = false;
-		}
+		$calloutText.html(e.data.str);
+		bounceBob();
 	}
 
 	function bounceBob() {
@@ -222,4 +192,14 @@ $(document).ready(function() {
 			$swatch.css('background-color', newColor);
 		}
 	}
+
+	bgGrid.init();
+	bgGrid.draw();
+
+	cGrid.init(['rgba(0, 0, 0, 0.5)']);
+	cGrid.draw();
+
+	oGrid.init();
+	pGrid.init();
+	window.oGrid = oGrid;
 });

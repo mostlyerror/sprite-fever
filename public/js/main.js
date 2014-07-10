@@ -3,7 +3,7 @@ $(function() {
 	attachRoute('#link-just-dance', '/dance');
 
 	attachRoute('#button-add-moves', '/moves', function(e) {	
-		$("#page-dim").css('opacity', 0.6).fadeIn(300);
+		$("#page-dim").css('opacity', 0.75).fadeIn(300);
 		$("#loading").css('opacity', 1).fadeIn(200);
 		var pixelData = oGrid.el.toDataURL();
 		$.ajax({

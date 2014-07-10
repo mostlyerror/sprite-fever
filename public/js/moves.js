@@ -8,6 +8,36 @@ $(function() {
   var captured = [];
   var countInterval;
 
+  var $callout = $('.moves-callout');
+  var $calloutText = $('.moves-callout-text');
+  var $helper = $('.moves-help-bob');
+  var $record = $("#button-record");
+  var $replay = $("#button-replay");
+  var $save = $("#button-save");
+
+  // instruction callouts
+  $record.on('mouseover', null, {str: 'Bless us with yo mad skillz!'}, callout);
+  $replay.on('mouseover', null, {str:  'Do a double take on those sick moves.'}, callout);
+  $save.on('mouseover', null, {str: 'Finalize your routine and let\'s partay!'}, callout);
+
+  function callout(e) {
+      $calloutText.html(e.data.str);
+      bounceBob();
+  }
+
+  function bounceBob() {
+    if (Math.random() > 0.5) {
+      $helper
+      .animate({top: '-3px', left: '-2px'}, 100)
+      .animate({top: '0px', left: '0px'}, 50)
+      
+    } else {
+      $helper
+      .animate({top: '-3px', left: '2px'}, 100)
+      .animate({top: '0px', left: '0px'}, 50);
+    }
+  }
+
   function replayDance(captured) {
     for (i = 0; i < captured.length; i++) {
         e = captured[i];
