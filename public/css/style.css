@@ -35,6 +35,10 @@ body{
 
 }
 
+.main-menu {
+  text-align: center;
+}
+
 .filler{
   height: 100px;
   position: relative;
@@ -42,6 +46,12 @@ body{
 
 .row{
   position: relative;
+}
+
+.row.outer {
+  margin-top: 30px;
+  margin-left: 25px;
+
 }
 html {
   background: url("../images/bg.jpg") no-repeat center center fixed;
@@ -82,10 +92,6 @@ html {
   margin-top: 10px;
   margin-left: 80%;
 }
-.runRight {
-  transform: translateX(50px);
-}
-
 
 .callout-text {
   color: #fff;
@@ -156,6 +162,9 @@ html {
 
 /*Middle Panel*/
 
+#middle-panel {
+
+}
 canvas {
 	cursor: url('../images/cursor.cur'), auto;
 }
@@ -177,12 +186,21 @@ canvas {
 
 /* Right Panel */
 
+#right-panel {
+  margin-right: -13px;
+}
 .preview-container {
 	position: relative;
 	border: 1px solid #fff;
 	height: 300px;
 	width:300px;
+  padding: 10px;
+}
+
+.preview-container-bg {
 	background: rgba(255,255,255,0.5);
+  height: 100%;
+  width: 100%;
 }
 
 #preview {
@@ -314,15 +332,14 @@ color: #fff;
   background-size: contain;
   height: 75px;
   width: 25%;
-  margin-top: 10px;
-  margin-left: 80%;
+  /*margin-top: 10px;*/
+  /*margin-left: 80%;*/
 }
 
 .moves-callout-text {
   color: #fff;
   line-height: 1.2rem;
 }
-
 
 .moves-callout {
   position: relative;
@@ -355,25 +372,20 @@ color: #fff;
   margin-top: -15px;
 }
 
-/*Instructions Overlay*/
+.moves-instructions-container, .dancer-container {
+  margin-top: 50px;
+}
 
-/*overlay*/
-/*.overlay-container {}
-.instructions-container {}
-.instructions {}*/
-
-/*instructions*/
-
-/*keymap tooltips*/
-
-li.tooltip {
-  /*list-style-type: none;*/
+.moves-instructions-container li {
+  list-style-type: none;
+  color: #fff;
+  font-size: 1.4em;
 }
 
 .keyboard-tip-outer {
   color: #eee;
-  height: 30px;
-  width: 30px;
+  height: 52px;
+  width: 52px;
   padding: 2px;
   text-align: center;
   border-radius: 15%;
@@ -388,4 +400,16 @@ li.tooltip {
 .keyboard-tip-inner span {
   display: inline-block;
   vertical-align: middle;
+}
+
+.move-name {
+  position: relative;
+  top: -43px;
+  left: 70px;
+}
+
+.image-move {
+  height: 52px;
+  width: auto;
+  margin-top: -7px;
 }

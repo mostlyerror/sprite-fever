@@ -1,33 +1,73 @@
 - content_for :moves
 %div.container
 	%div.row
-		%div.left.large-7.columns
+		%div.left.large-6.columns
 			%div.dancer-container.animated
 				%div.dancer
 					%img#dancer.animated(src=@img_data)
-		%div.right.large-5.columns
-			%div.moves-help-container
-				%div.moves-help-instructions.moves-callout
-					%div.moves-callout-text
-				%div.moves-help-bob.animated
-				%div.moves-animation-container
-					%label Dance Moves
-					%a#shake(href='#')
-						%img(src='/images/shake.png')
-					%a#bounce(href='#')
-						%img(src='/images/bounce.png')
-					%a#swing(href='#')
-						%img(src='/images/swing.png')
-					%a#wobble(href='#')
-						%img(src='/images/wobble.png')
+		%div.right.large-4.columns
+			%div.row
+				%div.moves-instructions-container
+					%ul
+						%li
+							%div.move-container
+								%div.keytip
+									%div.keyboard-tip-outer
+										%div.keyboard-tip-inner
+											%span 1
+								%div.move-name
+									%span 
+										%img.image-move(src='/images/shake.png')
+						%li
+							%div.move-container
+								%div.keytip
+									%div.keyboard-tip-outer
+										%div.keyboard-tip-inner
+											%span 2
+								%div.move-name
+									%span
+										%img.image-move(src='/images/bounce.png')
+						%li
+							%div.move-container
+								%div.keytip
+									%div.keyboard-tip-outer
+										%div.keyboard-tip-inner
+											%span 3
+								%div.move-name
+									%span
+										%img.image-move(src='/images/swing.png')
+						%li
+							%div.move-container
+								%div.keytip
+									%div.keyboard-tip-outer
+										%div.keyboard-tip-inner
+											%span 4
+								%div.move-name
+									%span
+										%img.image-move(src='/images/wobble.png')
+			/ %div.moves-animation-container
+			/ 	%label Dance Moves
+			/ 	%a#shake(href='#')
+			/ 		%img(src='/images/shake.png')
+			/ 	%a#bounce(href='#')
+			/ 		%img(src='/images/bounce.png')
+			/ 	%a#swing(href='#')
+			/ 		%img(src='/images/swing.png')
+			/ 	%a#wobble(href='#')
+			/ 		%img(src='/images/wobble.png')
+			%div.row
+				%div.moves-help-container
+					%div.moves-help-instructions.moves-callout
+						%div.moves-callout-text
+					%div.moves-help-bob.animated
 				%div.controls
-					%button#button-save.button.button-save
-						%span.fa.fa-save 
-						Save
-					%button#button-replay.button.button-replay
-						%span.fa.fa-video-camera 
-						Replay
 					%button#button-record.button.button-record
 						%span.fa.fa-circle
 						Record
+					%button#button-replay.button.button-replay
+						%span.fa.fa-video-camera 
+						Replay
+					%button#button-save.button.button-save
+						%span.fa.fa-save 
+						Save
 %script(src='/js/moves.js')

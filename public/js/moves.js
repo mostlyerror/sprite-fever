@@ -140,4 +140,5 @@ $(function() {
   $(window).on('resize', resize);
   $(document).ready(resize);
   $(document).on('mousemove', followMouse);
+  callout({data: 'Ready to show your stuff?'});
 });
