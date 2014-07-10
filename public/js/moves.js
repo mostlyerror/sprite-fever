@@ -16,11 +16,13 @@ $(function() {
   var $record = $("#button-record");
   var $replay = $("#button-replay");
   var $save = $("#button-save");
+  var $moves = $(".moves-instructions-container");
 
   // instruction callouts
   $record.on('mouseover', null, {str: 'Bless us with yo mad skillz!'}, callout);
   $replay.on('mouseover', null, {str:  'Do a double take on those sick moves.'}, callout);
   $save.on('mouseover', null, {str: 'Finalize your routine and let\'s partay!'}, callout);
+  $moves.on('mouseover', null, {str: 'Use the number keys to spice things up a bit.'}, callout);
 
   function callout(e) {
       $calloutText.html(e.data.str);
