@@ -7,6 +7,16 @@ body{
   overflow-x: hidden;
 }
 
+audio {
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+.button {
+  -webkit-box-shadow: 0 0 9px #333;
+  padding: 0.5em;
+}
+
 .container {
   padding: 30px;
   margin: 0 auto;
@@ -39,6 +49,10 @@ body{
   text-align: center;
 }
 
+.main-menu img {
+  margin-top: 1.2em;
+}
+
 .filler{
   height: 100px;
   position: relative;
@@ -49,7 +63,7 @@ body{
 }
 
 .row.outer {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 25px;
 
 }
@@ -226,10 +240,11 @@ canvas {
   color: #fff;
   display: none;
   position: fixed;
-  top: 50%;
+  top: calc(50% - 100px);
   left: calc(50% - 118px);
   font-size: 3.5em;
   font-weight: 400;
+  z-index: 1000;
 }
 .menu{
   display: block;
@@ -333,7 +348,7 @@ color: #fff;
   height: 75px;
   width: 25%;
   /*margin-top: 10px;*/
-  /*margin-left: 80%;*/
+  margin-left: 80%;
 }
 
 .moves-callout-text {
@@ -373,29 +388,31 @@ color: #fff;
 }
 
 .moves-instructions-container, .dancer-container {
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 .moves-instructions-container li {
   list-style-type: none;
   color: #fff;
   font-size: 1.4em;
+  margin-bottom: -20px;
 }
 
 .keyboard-tip-outer {
   color: #eee;
   height: 52px;
   width: 52px;
-  padding: 2px;
   text-align: center;
   border-radius: 15%;
-  border: 1px solid #eee;
 }
 
 .keyboard-tip-inner {
   border-radius: 15%;
-  border: 1px solid #eee;
-  padding: 2px;
+  border-top: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-bottom: 4px solid #eee;
+  padding: 4px;
 }
 .keyboard-tip-inner span {
   display: inline-block;
@@ -412,4 +429,64 @@ color: #fff;
   height: 52px;
   width: auto;
   margin-top: -7px;
+}
+
+.controls {
+  margin-top: 1.5em;
+  margin-left: 0.75em;
+}
+
+#saving {
+  display: none;
+  z-index: 1000;
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  top: calc(50% - 80px);
+  left: calc(50% - 326px);
+  width: 500px
+  font-size: 3em;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1000;
+  font-size: 2em;
+}
+
+#modal label {
+  font-size: 1em;
+  -webkit-appearance: none;
+}
+
+#modal input {
+  background-color: transparent;
+  font-size: 0.8em;
+  border: none;
+  box-shadow:none;
+  z-index: 1000;
+  color: #e67e22;
+  /*border-bottom: 1px solid #fff;*/
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 5px;
+}
+
+#modal input:hover {
+  /*border: none;*/
+  outline: none;
+  -webkit-appearance: none;
+  box-shadow:none;
+}
+
+input, input:focus {
+  border:none;
+}
+
+input {
+  animation: blink-empty 1s infinite;
+  border-left: transparent solid 1px;
+  margin:5px 
+}
+@keyframes blink-empty {
+  50% {border-left: 1px solid #333;}
 }

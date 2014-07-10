@@ -6,6 +6,8 @@ $(function() {
   var $dancerContainer = $(dancerContainer);
   var count = 3;  
   var captured = [];
+  window.captured = captured;
+  window.name;
   var countInterval;
 
   var $callout = $('.moves-callout');
@@ -132,13 +134,28 @@ $(function() {
   })
 
   $('#button-save').on('click', function(e) {
-    if (!captured.length) {
-
-    }
+    var name = showModal('This funky sprite have a name?');
   })
+
+  function showModal(txt) {
+    $("#page-dim").css('opacity', 0.75)
+      .fadeIn(500)
+      .promise()
+      .done(function() {
+        $("#modal label").text(txt);
+        $("#modal").fadeIn('fast');
+      });
+  }
   
+  $("#modal-name input").on('keypress', function(e) {
+    e.preventDefault();
+    if (e.which == 13) {
+      name = $(this).val();
+      $(this).trigger('named');
+    }
+  });  
+
   $(window).on('resize', resize);
   $(document).ready(resize);
   $(document).on('mousemove', followMouse);
-  callout({data: 'Ready to show your stuff?'});
 });

@@ -1,11 +1,11 @@
 - content_for :moves
 %div.container
 	%div.row
-		%div.left.large-6.columns
+		%div.left.large-7.columns
 			%div.dancer-container.animated
 				%div.dancer
 					%img#dancer.animated(src=@img_data)
-		%div.right.large-4.columns
+		%div.right.large-5.columns
 			%div.row
 				%div.moves-instructions-container
 					%ul
@@ -45,20 +45,11 @@
 								%div.move-name
 									%span
 										%img.image-move(src='/images/wobble.png')
-			/ %div.moves-animation-container
-			/ 	%label Dance Moves
-			/ 	%a#shake(href='#')
-			/ 		%img(src='/images/shake.png')
-			/ 	%a#bounce(href='#')
-			/ 		%img(src='/images/bounce.png')
-			/ 	%a#swing(href='#')
-			/ 		%img(src='/images/swing.png')
-			/ 	%a#wobble(href='#')
-			/ 		%img(src='/images/wobble.png')
 			%div.row
 				%div.moves-help-container
 					%div.moves-help-instructions.moves-callout
 						%div.moves-callout-text
+							Ready to show your stuff?
 					%div.moves-help-bob.animated
 				%div.controls
 					%button#button-record.button.button-record
@@ -70,4 +61,10 @@
 					%button#button-save.button.button-save
 						%span.fa.fa-save 
 						Save
+	%div#page-dim
+	%div#saving Saving
+	%div#modal
+		%form
+			%label.label-text
+			%input#sprite-name-input(autofocus='true')
 %script(src='/js/moves.js')
