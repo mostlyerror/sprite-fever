@@ -70,6 +70,7 @@ html {
   width: 75%;
   height: 75px;
 }
+
 .help-bob {
   position: relative;
   background: url('../images/loading_man.png');
@@ -81,6 +82,11 @@ html {
   margin-top: 10px;
   margin-left: 80%;
 }
+.runRight {
+  transform: translateX(50px);
+}
+
+
 .callout-text {
   color: #fff;
   line-height: 1.2rem;
@@ -192,12 +198,21 @@ canvas {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: rgba(0,0,0,1);
   z-index: 999;
   top: 0;
   left: 0;
 }
 
+#loading {
+  color: #e74c3c;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: calc(50% - 118px);
+  font-size: 3.5em;
+  font-weight: 400;
+}
 .menu{
   display: block;
     position: relative;

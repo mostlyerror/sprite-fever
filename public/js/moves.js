@@ -68,7 +68,7 @@ $(function() {
       $("#box").css('margin-top', y + 'px');
   }
 
-  function triggerAnimation(el, klassName) {
+  function triggerAnimation(el, klassName, callback, args) {
     el.stop(true, false).addClass(klassName).one('webkitAnimationEnd', function() { el.removeClass(klassName) });
   }  
 
@@ -98,6 +98,12 @@ $(function() {
       replayDance(captured);
     } else {
       console.log('nothing captured!');
+    }
+  })
+
+  $('#button-save').on('click', function(e) {
+    if (!captured.length) {
+
     }
   })
   

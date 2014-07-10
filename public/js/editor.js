@@ -1,5 +1,4 @@
 
-
 const TILE_SIZE = 30;
 const GRID_X = 16;
 const GRID_Y = 20;
