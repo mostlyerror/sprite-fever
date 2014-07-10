@@ -4,7 +4,7 @@ $(function() {
   var $dancer = $(dancer);
   var dancerContainer = document.querySelector('.dancer-container');
   var $dancerContainer = $(dancerContainer);
-  var count = 3;  
+  var count = 5;  
   var captured = [];
   window.captured = captured;
   window.name;
@@ -14,9 +14,12 @@ $(function() {
   var $calloutText = $('.moves-callout-text');
   var $helper = $('.moves-help-bob');
   var $record = $("#button-record");
+  var $recordCircle = $(".fa-circle");
   var $replay = $("#button-replay");
   var $save = $("#button-save");
   var $moves = $(".moves-instructions-container");
+  var $countdown = $("#countdown");
+  var $timer = $("#countdown .timer");
 
   // instruction callouts
   $record.on('mouseover', null, {str: 'Bless us with yo mad skillz!'}, callout);
@@ -55,13 +58,16 @@ $(function() {
   }
 
   function countdown() {
-    console.log(count);
     --count;
+    $timer.html(count);
     if (count == 0) {
+      count = 5;
+      $countdown.hide();
+      $timer.html(count);;
       console.log('recording')
       captureInput();
       clearInterval(countInterval);
-      count = 3;
+      $recordCircle.css('color', '#fff');
     }
   }
 
@@ -81,9 +87,9 @@ $(function() {
     });
 
     setTimeout(function() {
-      console.log('finished capturing');
       $(document).off('.capture');
-    }, 3000);
+      $replay.addClass('greenPulse');
+    }, 5000);
   }
 
   function followMouse(event) {
@@ -124,10 +130,18 @@ $(function() {
   });
 
   $('#button-record').on('click', function(e) {
+    $recordCircle.css('color', '#c0392b')
+    // $countdown.css('display', 'inline-block').fadeIn('slow');
+    $countdown.fadeIn('slow');
+    debugger;
     countInterval = setInterval(countdown, 1000);
   });
 
   $('#button-replay').on('click', function(e) {
+    setTimeout(function() {
+      callout({data: {str: 'WHOA! Calm down before this place BURNS DOWN!'}});
+    }, 2000);
+    $replay.removeClass('greenPulse');
     if (captured.length) {
       replayDance(captured);
     } else {
