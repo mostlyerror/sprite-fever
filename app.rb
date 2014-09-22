@@ -5,7 +5,7 @@ require 'sinatra/reloader'
 require 'haml'
 require 'json'
 require 'firebase'
-require 'pry'
+# require 'pry'
 
 class SpriteApp < Sinatra::Base
 
