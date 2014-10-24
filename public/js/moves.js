@@ -44,15 +44,16 @@ $(function() {
     }
   }
 
-  function replayDance(captured) {
+  function replayDance(captured, dancer) {
+    var dancer = dancer || $dancer;
     for (i = 0; i < captured.length; i++) {
-        e = captured[i];
-        t = e.t;
-        setTimeout((function (e) {
+        ev = captured[i];
+        t = ev.t;
+        setTimeout((function (ev) {
             return function () {
-              $dancer.trigger(e.originalEvent);
+              $dancer.trigger(ev.originalEvent);
             };
-        })(e), t);
+        })(ev), t);
     }
   }
 
@@ -99,7 +100,6 @@ $(function() {
       var angleX = (mouseY / height) * 45;
       var angleY = (mouseX / width) * 45;
       dancer.style.webkitTransform = "rotateX(" + angleX + "deg) rotateY(" + angleY + "deg)";
-      // console.log(dancer.style.webkitTransform);
   }
 
   function resize() {
@@ -163,6 +163,9 @@ $(function() {
   function jsonifyEventObject(event) {
     var eventObject = {
       type: event.type,
+      which: event.which,
+      keyCode: event.keyCode,
+      charCode: event.charCode,
       clientX: event.clientX,
       clientY: event.clientY,
       pageX: event.pageX,

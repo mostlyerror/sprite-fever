@@ -35,6 +35,16 @@ class SpriteApp < Sinatra::Base
     haml :moves, layout: false
   end
 
+  get '/sprites/:id' do
+    response = @@firebase.get("sprites/#{params[:id]}", { id: session[:spriteId] })
+    @sprite = JSON.parse(response.response.body)
+    content_type :json
+    @sprite.to_json
+  end
+
+  get '/sprites' do
+  end
+
   post '/sprites' do
     response = @@firebase.push("sprites", { dataURL: params['imgData'] })
     session[:spriteId] = JSON.parse(response.response.body)['name']
@@ -42,7 +52,6 @@ class SpriteApp < Sinatra::Base
   end
 
   post '/sprites/:id/moves' do
-    p params.inspect
     response = @@firebase.update("sprites/#{session[:spriteId]}", { moves: request.params['moves'], name: request.params['name']})
   end
 
