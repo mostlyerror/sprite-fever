@@ -7,7 +7,6 @@ $(function() {
   var count = 5;  
   var captured = [];
   window.captured = captured;
-  window.name;
   var countInterval;
 
   var $callout = $('.moves-callout');
@@ -100,7 +99,7 @@ $(function() {
       var angleX = (mouseY / height) * 45;
       var angleY = (mouseX / width) * 45;
       dancer.style.webkitTransform = "rotateX(" + angleX + "deg) rotateY(" + angleY + "deg)";
-      console.log(dancer.style.webkitTransform);
+      // console.log(dancer.style.webkitTransform);
   }
 
   function resize() {
@@ -131,9 +130,7 @@ $(function() {
 
   $('#button-record').on('click', function(e) {
     $recordCircle.css('color', '#c0392b')
-    // $countdown.css('display', 'inline-block').fadeIn('slow');
     $countdown.fadeIn('slow');
-    debugger;
     countInterval = setInterval(countdown, 1000);
   });
 
@@ -162,14 +159,51 @@ $(function() {
         $("#modal").fadeIn('fast');
       });
   }
+
+  function jsonifyEventObject(event) {
+    var eventObject = {
+      type: event.type,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      pageX: event.pageX,
+      pageY: event.pageY,
+      screenX: event.screenX,
+      screenY: event.screenY,
+      offsetX: event.offsetX,
+      offsetY: event.offsetY,
+      t: event.t,
+      spriteID: currentSpriteId,
+      timestamp: event.timestamp,
+      type: event.type
+    };
+    return JSON.stringify(eventObject);
+  }
   
-  $("#modal-name input").on('keypress', function(e) {
+  $("#sprite-name-input-form").on('submit', function(e) {
     e.preventDefault();
-    if (e.which == 13) {
-      name = $(this).val();
-      $(this).trigger('named');
-    }
-  });  
+    var $form = $(this);
+    $("#page-dim").css('opacity', 0.75).fadeIn(300);
+    $("#loading").css('opacity', 1).fadeIn(200);
+    var url = '/sprites/' + window.currentSpriteId + '/moves';
+    var data = {
+      name: $form.find('input').val(),
+      moves: captured.map(function(event) { return jsonifyEventObject(event); })
+    };
+      $.post(url, data);
+      changeView(e, '/dance');
+  });
+
+  function changeView(e, route) {
+    console.log('changeView(' + route + ')');
+    e.preventDefault();
+    $wrapper = $('<div>');
+    $wrapper.addClass('loaded-content-wrapper').appendTo('#content').load(route, function() {
+      console.log($(this).prev());
+      $(this).animate({marginLeft: 0}, 'slow').prev().animate({marginLeft: '-100%'}, 'slow', function() {
+        $(this).remove();
+      })
+    });
+  }
 
   $(window).on('resize', resize);
   $(document).ready(resize);

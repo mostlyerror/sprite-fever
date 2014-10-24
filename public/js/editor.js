@@ -120,7 +120,6 @@ $(document).ready(function() {
 
 	$overlay.on('mousedown', function(e) {
 		e.preventDefault();
-
 		var tile  = getTile(e, oGrid);
 		var pTile = pGrid.tiles[tile.y][tile.x];
 		drawTile(tile, 'draw');
@@ -147,11 +146,13 @@ $(document).ready(function() {
 		});
 	});
 
+	// not called anywhere.. ?
 	function updateDimensions(x, y, el) {
 		console.log(x, y);
 		el.html(x + ' x ' + y);
 	}
 
+	// redraws preview grid to scale
 	function updatePreview() {
 		$.extend(pGrid.tiles, oGrid.tiles);
 		for (var row in pGrid.tiles) {
