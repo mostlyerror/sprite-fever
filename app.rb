@@ -43,7 +43,7 @@ class SpriteApp < Sinatra::Base
 
   post '/sprites/:id/moves' do
     p params.inspect
-    response = @@firebase.update(session[:spriteId], { moves: request.params['moves'], name: request.params['name']})
+    response = @@firebase.update("sprites/#{session[:spriteId]}", { moves: request.params['moves'], name: request.params['name']})
   end
 
   get '/dance' do
