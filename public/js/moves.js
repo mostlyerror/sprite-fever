@@ -1,24 +1,23 @@
 $(function() {
 
-  var dancer = document.getElementById('dancer');
-  var $dancer = $(dancer);
-  var dancerContainer = document.querySelector('.dancer-container');
-  var $dancerContainer = $(dancerContainer);
-  var count = 5;  
-  var captured = [];
-  window.captured = captured;
-  var countInterval;
-
-  var $callout = $('.moves-callout');
-  var $calloutText = $('.moves-callout-text');
-  var $helper = $('.moves-help-bob');
-  var $record = $("#button-record");
-  var $recordCircle = $(".fa-circle");
-  var $replay = $("#button-replay");
-  var $save = $("#button-save");
-  var $moves = $(".moves-instructions-container");
-  var $countdown = $("#countdown");
-  var $timer = $("#countdown .timer");
+  var dancer = document.getElementById('dancer')
+  , $dancer = $(dancer)
+  , dancerContainer = document.querySelector('.dancer-container')
+  , $dancerContainer = $(dancerContainer)
+  , count = 5  
+  , captured = []
+  , window.captured = captured
+  , countInterval
+  , $callout = $('.moves-callout')
+  , $calloutText = $('.moves-callout-text')
+  , $helper = $('.moves-help-bob')
+  , $record = $("#button-record")
+  , $recordCircle = $(".fa-circle")
+  , $replay = $("#button-replay")
+  , $save = $("#button-save")
+  , $moves = $(".moves-instructions-container")
+  , $countdown = $("#countdown")
+  , $timer = $("#countdown .timer");
 
   // instruction callouts
   $record.on('mouseover', null, {str: 'Bless us with yo mad skillz!'}, callout);
